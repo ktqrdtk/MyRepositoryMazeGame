@@ -155,6 +155,26 @@ public class Grid {
 		System.out.println("Has left: " + input.left);
 		System.out.println("Has right: " + input.right);
 	}
+	
+	public boolean hasTopEz()
+	{
+		return this.top;
+	}
+	
+	public boolean hasBottomEz()
+	{
+		return this.bottom;
+	}
+	
+	public boolean hasLeftEz()
+	{
+		return this.left;
+	}
+	
+	public boolean hasRightEz()
+	{
+		return this.right;
+	}
 }
 
 
