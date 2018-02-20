@@ -5,11 +5,11 @@ import java.util.Random;
 public class Maze {
 	
 	private int numOfGrids;
+	private Grid[][] maze;
 	
 	public Maze(int numOfGrids)
 	{
 		this.numOfGrids = numOfGrids;
-		Generator gen = new Generator(numOfGrids);
 	}
 	
 	public void makeMaze(int numOfGrids)
