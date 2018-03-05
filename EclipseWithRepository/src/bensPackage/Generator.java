@@ -6,66 +6,81 @@ import java.util.Random;
 public class Generator {
 	
 	private int size;
-	private int chunks;
-	
-	public Generator(int chunks)
-	{
-		this.chunks = chunks;
-		this.size = this.chunks * 12;
-		chunkGenerator();
-	}
+	//don't use these four without resetting them to random
+	private boolean left;
+	private boolean right;
+	private boolean top;
+	private boolean bottom;
 	
 	public void combine()
 	{
 		
 	}
 	
-	public void chunkGenerator()
+	public Grid[][] setMaze(int size)
 	{
-		switch(this.chunks)
+		this.size = size;
+		Grid[][] theMaze = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
+		switch(size)
 		{
 			case 1 :
-				maze1();
+				theMaze = maze1();
 				break;
 				
 			case 4 :
-				maze4();
+				theMaze = maze4();
 				break;
 				
 			case 9 :
-				maze9();
+				theMaze = maze9();
 				break;
 				
 			case 16 :
-				maze16();
+				theMaze = maze16();
 				break;
 				
 			default :
-				maze1();
+				theMaze = maze1();
 		}
+		
+		return theMaze;
 	}
 	 
-	public void maze1()
+	public Grid[][] maze1()
 	{
+		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
 		Grid grid00 = getRandomChunk();
+		theGrid[0][0] = grid00;
+		return theGrid;
 	}
 	
-	public void maze4()
+	public Grid[][] maze4()
 	{
-		
+		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
+		Grid grid00 = getRandomChunk(false, true, false, true);
+		Grid grid01 = getRandomChunk(false, true, true, false);
+		Grid grid10 = getRandomChunk(true, false, false, true);
+		Grid grid11 = getRandomChunk(true, false, true, false);
+		theGrid[0][0] = grid00;
+		theGrid[0][1] = grid01;
+		theGrid[1][0] = grid10;
+		theGrid[1][1] = grid11;
+		return theGrid;
 	}
 	
-	public void maze9()
+	public Grid[][] maze9()
 	{
-		
+		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
+		return theGrid;
 	}
 	
-	public void maze16()
+	public Grid[][] maze16()
 	{
-		
+		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
+		return theGrid;
 	}
 	
-	public Grid getRandomChunk()
+	public static Grid getRandomChunk()
 	{
 		Random randomizer = new Random();
 		int randomIndex = randomizer.nextInt(MazeReader.listOfGrids.size());
@@ -73,7 +88,8 @@ public class Generator {
 		return randomGrid;
 	}
 	
-	public Grid getRandomChunk(boolean top, boolean bottom, boolean left, boolean right)
+	public static Grid getRandomChunk(boolean top, boolean bottom, boolean left, boolean right)
+
 	{
 		Random randomizer = new Random();
 		
@@ -204,5 +220,61 @@ public class Generator {
 		listOfUnusedIndexes = null;
 		
 		return randomGrid;
+	}
+	
+	public void setRandomTwo()
+	{
+		Random randomizer = new Random();
+		int randomInt = randomizer.nextInt(6);
+		switch(randomInt)
+		{
+		case 0 :
+			left = true;
+			top = true;
+			right = false;
+			bottom = false;
+			break;
+		
+		case 1 :
+			left = true;
+			right = true;
+			top = false;
+			bottom = false;
+			break;
+			
+		case 2 :
+			left = true;
+			bottom = true;
+			top = false;
+			right = false;
+			break;
+			
+		case 3 :
+			top = true;
+			right = true;
+			left = false;
+			bottom = false;
+			break;
+			
+		case 4 :
+			top = true;
+			bottom = true;
+			left = false;
+			right = false;
+			break;
+			
+		case 5 :
+			right = true;
+			bottom = true;
+			top = false;
+			left = false;
+			break;
+			
+		default :
+			right = false;
+			left = false;
+			top = false;
+			bottom = false;
+		}
 	}
 }

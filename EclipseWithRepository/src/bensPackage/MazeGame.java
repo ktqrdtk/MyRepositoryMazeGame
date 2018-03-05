@@ -1,33 +1,41 @@
 package bensPackage;
 
+import javax.swing.JFrame;
+
 public class MazeGame {
-	
-	private MazeReader mazeReader;
 
 	public static void main(String[] args) {
-		//tempDecomp();
-		//tempComp();
-		MazeGame mzGm = new MazeGame();
+		
+		javax.swing.SwingUtilities.invokeLater(new Runnable()
+				{
+					public void run()
+					{
+						createAndShowGUI();
+					}
+				});
+		
+		createAndShowGUI();
 		int totalNumOfMazesInFile = 4;
-		mzGm.readFile(totalNumOfMazesInFile);
+		//int totalNumOfMazesInFile = new File("  put dir here  ").listFiles().length();
+		readFile(totalNumOfMazesInFile);
+		
+		//askForSize();
 	}
 	
-	public static void tempDecomp()
+	public static void readFile(int input)
 	{
-		String firstNumberSet = Chunk.chunks[0];
-		Grid firstGrid = Chunk.chunkDeconverter(firstNumberSet);
-		firstGrid.localPrintGrid();
+		MazeReader mazeReader = new MazeReader(input);
 	}
 	
-	
-	public static void tempComp()
+	public static void createAndShowGUI()
 	{
-		Chunk.chunkConverter();
-	}
-	
-	public void readFile(int input)
-	{
-		mazeReader = new MazeReader(input);
+		JFrame frame = new JFrame("Maze Game - Ben Hilton");
+		MyJPanel panel = new MyJPanel();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(panel);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.pack();
+        frame.setVisible(true);
 	}
 
 }
