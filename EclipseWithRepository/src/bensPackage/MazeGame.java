@@ -45,7 +45,7 @@ public class MazeGame
 				});
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
-		//askForSize();
+		mzGm.askForSize(this.frame);
 	}
 	
 	public void readFile(int input)
@@ -96,9 +96,14 @@ public class MazeGame
 		inputFrame.addActionListeners();
 	}
 	
-	public void askForSize()
+	public void askForSize(MyJFrame inputFrame)
 	{
+		MyJPanel askingPanel = new MyJPanel(inputFrame.getNumOfPanels());
 		
+		//should add other components to panel so that they cover real panel
+		
+		inputFrame.addPanelToList(askingPanel);
+		inputFrame.addPanelToFrame(askingPanel.getListLocation(), BorderLayout.CENTER);
 	}
 	
 	public MyJFrame getFrame()
