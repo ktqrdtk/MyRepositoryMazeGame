@@ -8,35 +8,25 @@ import javax.swing.JPanel;
 
 public class MyJPanel extends JPanel {
 	
-	//private String JLabel1;
-	//private boolean JLabel1Enabled;
+	private String JLabel1;
+	private boolean JLabel1Enabled;
+	private int listLocation;
 	
-	public MyJPanel()
+	public MyJPanel(int location)
 	{
 		super();
-		setOpaque(true);
-		//JLabel1 = "Testing";
-		//JLabel1Enabled = false;
+		listLocation = location;
+		setOpaque(false);
 	}
 	
-	/*public void setJLabel1(boolean input)
+	public int getListLocation()
 	{
-		JLabel1Enabled = input;
-		repaint();
+		return this.listLocation;
 	}
-	
-	public boolean getJLabel1()
-	{
-		return JLabel1Enabled;
-	}*/
 	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		/*if(JLabel1Enabled)
-		{
-			g.drawString(JLabel1, 800, 300);
-		}*/
 	}
 	
 }

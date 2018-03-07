@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 @SuppressWarnings({ "serial", "unused" })
 public class MyJFrame extends JFrame implements ActionListener{
 	
-	private MyJPanel panel;
+	private ArrayList<MyJPanel> panelList;
 	private ArrayList<JButton> listOfButtons;
 	private ArrayList<JLabel> listOfLabels;
 	private String currentText;
@@ -30,48 +30,66 @@ public class MyJFrame extends JFrame implements ActionListener{
 	public MyJFrame(String input, LayoutManager layout)
 	{
 		super(input);
-		panel = new MyJPanel();
+		MyJPanel panel = new MyJPanel(0);
 		panel.setLayout(layout);
 		listOfButtons = new ArrayList<JButton>();
 		listOfLabels = new ArrayList<JLabel>();
-		this.add(panel);
+		panelList = new ArrayList<MyJPanel>();
+		panelList.add(panel);
+		this.add(panelList.get(panel.getListLocation()));
 	}
 	
-	public MyJFrame(String input)
+	public int getNumOfPanels()
 	{
-		this(input, new BorderLayout());
+		return this.panelList.size();
 	}
 	
-	public void addComponentToPanel(JButton input)
+	public MyJPanel getMainPane()
 	{
-		this.addComponentToPanel(input, BorderLayout.NORTH);
+		return this.panelList.get(0);
 	}
 	
-	public void addComponentToPanel(JLabel input)
+	public int addPanelToList(MyJPanel thePanel)
 	{
-		this.addComponentToPanel(input, BorderLayout.CENTER);
+		// when using use like this:  
+		//MyJPanel upperPanel = new MyJPanel(inputFrame.getNumOfPanels());
+		//inputFrame.addPanel(upperPanel);
+		
+		
+		panelList.add(thePanel);
+		return panelList.size() - 1;
 	}
 	
-	public void addComponentToPanel(JLabel input, String location)
+	public void addPanelToFrame(int index, String location)
 	{
-		this.panel.add(input, location);
-		this.listOfLabels.add(input);
-		this.panel.repaint();
+		this.add(panelList.get(index), location);
 	}
 	
-	public void addComponentToPanel(JButton input, String location)
+	public void addComponentToPanelNonLayout(JButton input, int panelNum)
 	{
-		this.panel.add(input, location);
+		this.panelList.get(panelNum).add(input);
 		this.listOfButtons.add(input);
-		this.panel.repaint();
+		this.panelList.get(panelNum).repaint();
+		this.repaint();
+	}
+	
+	public void addComponentToPanel(JLabel input, String location, int panelNum)
+	{
+		this.panelList.get(panelNum).add(input, location);
+		this.listOfLabels.add(input);
+		this.panelList.get(panelNum).repaint();
+		this.repaint();
+	}
+	
+	public void addComponentToPanel(JButton input, String location, int panelNum)
+	{
+		this.panelList.get(panelNum).add(input, location);
+		this.listOfButtons.add(input);
+		this.panelList.get(panelNum).repaint();
+		this.repaint();
 	}
 	
 	public void setText(String input)
-	{
-		this.setText(input, BorderLayout.CENTER);
-	}
-	
-	public void setText(String input, String location)
 	{
 		this.currentText = input;
 		try
@@ -84,7 +102,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		}
 	}
 	
-	public void addText(String input, Boolean withEnterAfter)
+	public void addText(String input, Boolean withEnterAfter, int panelNum)
 	{
 		if(withEnterAfter)
 		{
@@ -95,25 +113,21 @@ public class MyJFrame extends JFrame implements ActionListener{
 			this.txtArea.append(input);
 		}
 		
-		this.panel.repaint();
+		this.panelList.get(panelNum).repaint();
 	}
 	
-	public void addComponentToPanel(TextArea input)
+	public void addComponentToPanel(TextArea theTextArea, String location, int panelNum)
 	{
-		this.addComponentToPanel(input, BorderLayout.CENTER);
+		this.txtArea = theTextArea;
+		txtArea.setText(currentText);
+		this.panelList.get(panelNum).add(txtArea, location);
+		this.panelList.get(panelNum).repaint();
+		this.repaint();
 	}
 	
-	public void addComponentToPanel(TextArea input, String location)
+	public MyJPanel getPanel(int panelNum)
 	{
-		this.txtArea = input;
-		this.setText(currentText);
-		this.panel.add(txtArea, location);
-		this.panel.repaint();
-	}
-	
-	public MyJPanel getPanel()
-	{
-		return this.panel;
+		return this.panelList.get(panelNum);
 	}
 	
 	public void addActionListeners()
@@ -128,15 +142,9 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		switch(e.getActionCommand())
 		{
-		/*case "button1":
-			if(this.getPanel().getJLabel1())
-			{
-				this.getPanel().setJLabel1(false);
-			}
-			else
-			{
-				this.getPanel().setJLabel1(true);
-			}*/
+		case "button1":
+			break;
 		}
 	}
+	
 }
