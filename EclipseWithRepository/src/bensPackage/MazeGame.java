@@ -61,15 +61,9 @@ public class MazeGame
 	
 	public void addComponentsToPanel(MyJFrame inputFrame)
 	{
-		JButton button1 = new JButton("Start");
-		button1.setHorizontalTextPosition(AbstractButton.LEADING);
-		button1.setActionCommand("button1");
-		button1.setEnabled(true);
-		
-		JLabel label1 = new JLabel("E'llo", SwingConstants.LEADING);
+		MyJButton button1 = new MyJButton("Start", AbstractButton.LEADING, "button1");
 		
 		inputFrame.addComponentToPanel(button1);
-		inputFrame.addComponentToPanel(label1);
 		inputFrame.addActionListeners();
 	}
 	

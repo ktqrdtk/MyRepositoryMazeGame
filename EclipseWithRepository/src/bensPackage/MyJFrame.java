@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,14 +23,19 @@ public class MyJFrame extends JFrame implements ActionListener{
 	private ArrayList<JButton> listOfButtons;
 	private ArrayList<JLabel> listOfLabels;
 	
-	public MyJFrame(String input)
+	public MyJFrame(String input, LayoutManager layout)
 	{
 		super(input);
 		panel = new MyJPanel();
-		panel.setLayout(new FlowLayout());
+		panel.setLayout(layout);
 		listOfButtons = new ArrayList<JButton>();
 		listOfLabels = new ArrayList<JLabel>();
 		this.add(panel);
+	}
+	
+	public MyJFrame(String input)
+	{
+		this(input, new BorderLayout());
 	}
 	
 	public void addComponentToPanel(JButton input)

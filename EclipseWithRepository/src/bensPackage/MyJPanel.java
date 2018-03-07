@@ -34,7 +34,7 @@ public class MyJPanel extends JPanel {
 		super.paintComponent(g);
 		if(JLabel1Enabled)
 		{
-			g.drawString(JLabel1, 100, 100);
+			g.drawString(JLabel1, 800, 300);
 		}
 	}
 	
