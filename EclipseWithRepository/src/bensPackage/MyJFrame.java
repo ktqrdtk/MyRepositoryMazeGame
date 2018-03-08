@@ -2,6 +2,7 @@ package bensPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -65,6 +68,11 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.add(panelList.get(index), location);
 	}
 	
+	public void addPanelToMainPanel(int index, String location)
+	{
+		this.getMainPane().add(panelList.get(index), location);
+	}
+	
 	public void addComponentToPanelNonLayout(JButton input, int panelNum)
 	{
 		this.panelList.get(panelNum).add(input);
@@ -83,10 +91,21 @@ public class MyJFrame extends JFrame implements ActionListener{
 	
 	public void addComponentToPanel(JButton input, String location, int panelNum)
 	{
-		this.panelList.get(panelNum).add(input, location);
-		this.listOfButtons.add(input);
-		this.panelList.get(panelNum).repaint();
-		this.repaint();
+		if(!location.equals("noLayout"))
+		{
+			this.panelList.get(panelNum).add(input, location);
+			this.listOfButtons.add(input);
+			this.panelList.get(panelNum).repaint();
+			this.repaint();
+		}
+		else
+		{
+			this.panelList.get(panelNum).add(input);
+			this.listOfButtons.add(input);
+			this.panelList.get(panelNum).repaint();
+			this.repaint();
+		}
+
 	}
 	
 	public void setText(String input)
@@ -142,9 +161,40 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		switch(e.getActionCommand())
 		{
-		case "button1":
+		case "size1":
+			System.out.println("Button1 was pressed");
 			break;
 		}
+	}
+	
+	public void askForSize()
+	{
+		MyJPanel askingPanel = new MyJPanel(this.getNumOfPanels());
+		this.addPanelToList(askingPanel);
+		MyJPanel buttonPanel = new MyJPanel(this.getNumOfPanels(), new FlowLayout());
+		this.addPanelToList(buttonPanel);
+		askingPanel.add(buttonPanel, BorderLayout.CENTER);
+		this.addPanelToFrame(askingPanel.getListLocation(), BorderLayout.CENTER);
+		this.remove(this.getMainPane());
+		//readd it later
+		
+
+		this.addButtonsForSize(buttonPanel);
+	}
+	
+	public void addButtonsForSize(MyJPanel inputPanel)
+	{
+		MyJButton b1 = new MyJButton("1 X 1", (int)AbstractButton.CENTER_ALIGNMENT, "size1");
+		MyJButton b2 = new MyJButton("2 X 2", (int)AbstractButton.CENTER_ALIGNMENT, "size2");
+		MyJButton b3 = new MyJButton("3 X 3", (int)AbstractButton.CENTER_ALIGNMENT, "size3");
+		this.listOfButtons.add(b1);
+		this.listOfButtons.add(b2);
+		this.listOfButtons.add(b3);
+		addActionListeners();
+		this.addComponentToPanelNonLayout(b1, inputPanel.getListLocation());
+		this.addComponentToPanelNonLayout(b2, inputPanel.getListLocation());
+		//this ^^ and this vvv do the same thing just call them differently
+		this.addComponentToPanel(b3, "noLayout", inputPanel.getListLocation());
 	}
 	
 }

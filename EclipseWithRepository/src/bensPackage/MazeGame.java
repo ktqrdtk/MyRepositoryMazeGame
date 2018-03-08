@@ -41,15 +41,16 @@ public class MazeGame
 					public void run()
 					{
 						mzGm.createAndShowGUI();
+						mzGm.frame.askForSize();
 					}
 				});
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
-		mzGm.askForSize(this.frame);
 	}
 	
 	public void readFile(int input)
 	{
+		@SuppressWarnings("unused")
 		MazeReader mazeReader = new MazeReader(input);
 	}
 	
@@ -84,7 +85,7 @@ public class MazeGame
 		MyJPanel upperPanel = new MyJPanel(inputFrame.getNumOfPanels());
 		inputFrame.addPanelToList(upperPanel);
 		upperPanel.setLayout(new GridBagLayout());
-		inputFrame.addPanelToFrame(upperPanel.getListLocation(), BorderLayout.NORTH);
+		inputFrame.addPanelToMainPanel(upperPanel.getListLocation(), BorderLayout.NORTH);
 		
 		inputFrame.addComponentToPanelNonLayout(button1, upperPanel.getListLocation());
 		inputFrame.addComponentToPanelNonLayout(button2, upperPanel.getListLocation());
@@ -94,16 +95,6 @@ public class MazeGame
 		inputFrame.addComponentToPanel(label3, BorderLayout.SOUTH, inputFrame.getMainPane().getListLocation());
 		inputFrame.addComponentToPanel(txtArea, BorderLayout.CENTER ,inputFrame.getMainPane().getListLocation());
 		inputFrame.addActionListeners();
-	}
-	
-	public void askForSize(MyJFrame inputFrame)
-	{
-		MyJPanel askingPanel = new MyJPanel(inputFrame.getNumOfPanels());
-		
-		//should add other components to panel so that they cover real panel
-		
-		inputFrame.addPanelToList(askingPanel);
-		inputFrame.addPanelToFrame(askingPanel.getListLocation(), BorderLayout.CENTER);
 	}
 	
 	public MyJFrame getFrame()
