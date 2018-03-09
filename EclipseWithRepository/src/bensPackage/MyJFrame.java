@@ -1,27 +1,19 @@
 package bensPackage;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-@SuppressWarnings({ "serial", "unused" })
+@SuppressWarnings({"serial"})
 public class MyJFrame extends JFrame implements ActionListener{
 	
 	private ArrayList<MyJPanel> panelList;
@@ -30,6 +22,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 	private String currentText;
 	private TextArea txtArea;
 	private int chosenSize;
+	private MyJPanel askingPanel;
 	
 	public MyJFrame(String input, LayoutManager layout)
 	{
@@ -79,7 +72,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		this.panelList.get(panelNum).add(input);
 		this.listOfButtons.add(input);
-		this.panelList.get(panelNum).repaint();
+		this.revalidate();
 		this.repaint();
 	}
 	
@@ -87,7 +80,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		this.panelList.get(panelNum).add(input, location);
 		this.listOfLabels.add(input);
-		this.panelList.get(panelNum).repaint();
+		this.revalidate();
 		this.repaint();
 	}
 	
@@ -97,14 +90,14 @@ public class MyJFrame extends JFrame implements ActionListener{
 		{
 			this.panelList.get(panelNum).add(input, location);
 			this.listOfButtons.add(input);
-			this.panelList.get(panelNum).repaint();
+			this.revalidate();
 			this.repaint();
 		}
 		else
 		{
 			this.panelList.get(panelNum).add(input);
 			this.listOfButtons.add(input);
-			this.panelList.get(panelNum).repaint();
+			this.revalidate();
 			this.repaint();
 		}
 
@@ -119,7 +112,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		}
 		catch(Exception ex)
 		{
-			//will error when txtarea hasnt been set
+			//will error when txtarea hasnt been set, which is fine
 		}
 	}
 	
@@ -142,7 +135,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.txtArea = theTextArea;
 		txtArea.setText(currentText);
 		this.panelList.get(panelNum).add(txtArea, location);
-		this.panelList.get(panelNum).repaint();
+		this.revalidate();
 		this.repaint();
 	}
 	
@@ -165,21 +158,35 @@ public class MyJFrame extends JFrame implements ActionListener{
 		{
 		case "size1":
 			chosenSize = 1;
+			removeUpperPanel();
 			break;
 		
 		case "size2":
 			chosenSize = 2;
+			removeUpperPanel();
 			break;
 			
 		case "size3":
-			chosenSize = 2;
+			chosenSize = 3;
+			removeUpperPanel();
 			break;
+			
+		case "button4message":
 		}
+	}
+	
+	public void removeUpperPanel()
+	{
+		this.remove(askingPanel);
+		this.add(this.getMainPane());
+		this.setText(String.valueOf(this.chosenSize));
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public void askForSize()
 	{
-		MyJPanel askingPanel = new MyJPanel(this.getNumOfPanels());
+		askingPanel = new MyJPanel(this.getNumOfPanels());
 		this.addPanelToList(askingPanel);
 		MyJPanel buttonPanel = new MyJPanel(this.getNumOfPanels(), new FlowLayout());
 		this.addPanelToList(buttonPanel);
@@ -188,7 +195,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.addComponentToPanel(upperLabel, BorderLayout.NORTH, askingPanel.getListLocation());
 		this.addPanelToFrame(askingPanel.getListLocation(), BorderLayout.CENTER);
 		this.remove(this.getMainPane());
-		//readd it later
+		//re add it later
 		
 
 		this.addButtonsForSize(buttonPanel);

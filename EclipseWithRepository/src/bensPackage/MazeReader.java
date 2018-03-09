@@ -38,7 +38,6 @@ public class MazeReader {
 					}
 				}
 				Grid curGrid = new Grid(gridInStringInt);
-				curGrid.localPrintGrid();
 				listOfGrids.add(curGrid);
 				
 				bufferedReader.close();

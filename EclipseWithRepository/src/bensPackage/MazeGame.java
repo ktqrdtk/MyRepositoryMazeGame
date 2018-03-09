@@ -1,25 +1,16 @@
 package bensPackage;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
 import java.awt.TextArea;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.AbstractButton;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 public class MazeGame
 {
@@ -28,7 +19,8 @@ public class MazeGame
 	public static void main(String[] args) {
         try 
         {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        	UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } 
         catch (Exception ex) 
         {
@@ -69,6 +61,7 @@ public class MazeGame
 		MyJButton button1 = new MyJButton("Button1", AbstractButton.CENTER, "button1");
 		MyJButton button2 = new MyJButton("Button2", AbstractButton.CENTER, "button1");
 		MyJButton button3 = new MyJButton("Button3", AbstractButton.CENTER, "button1");
+		MyJButton button4 = new MyJButton("Hey Herschi", AbstractButton.TRAILING, "commandHere");
 		button1.setPreferredSize(new Dimension(50, 50));
 		
 		JLabel label1 = new JLabel("WestFiller");
@@ -87,6 +80,7 @@ public class MazeGame
 		upperPanel.setLayout(new GridBagLayout());
 		inputFrame.addPanelToMainPanel(upperPanel.getListLocation(), BorderLayout.NORTH);
 		
+		inputFrame.addComponentToPanelNonLayout(button4, upperPanel.getListLocation());
 		inputFrame.addComponentToPanelNonLayout(button1, upperPanel.getListLocation());
 		inputFrame.addComponentToPanelNonLayout(button2, upperPanel.getListLocation());
 		inputFrame.addComponentToPanelNonLayout(button3, upperPanel.getListLocation());

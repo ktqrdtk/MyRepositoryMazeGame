@@ -1,5 +1,6 @@
 package bensPackage;
 
+@SuppressWarnings("unused")
 public class Maze {
 	
 	private int numOfGrids;

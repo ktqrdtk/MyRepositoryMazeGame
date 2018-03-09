@@ -1,14 +1,12 @@
 package bensPackage;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-@SuppressWarnings({ "serial", "unused" })
+@SuppressWarnings({"serial", "unused"})
 public class MyJPanel extends JPanel {
 	
 	private String JLabel1;

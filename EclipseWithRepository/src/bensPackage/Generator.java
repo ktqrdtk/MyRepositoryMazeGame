@@ -3,6 +3,7 @@ package bensPackage;
 import java.util.ArrayList;
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class Generator {
 	
 	private int size;
