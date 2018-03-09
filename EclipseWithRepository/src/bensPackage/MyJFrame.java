@@ -29,6 +29,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 	private ArrayList<JLabel> listOfLabels;
 	private String currentText;
 	private TextArea txtArea;
+	private int chosenSize;
 	
 	public MyJFrame(String input, LayoutManager layout)
 	{
@@ -40,6 +41,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		panelList = new ArrayList<MyJPanel>();
 		panelList.add(panel);
 		this.add(panelList.get(panel.getListLocation()));
+		this.chosenSize = -1;
 	}
 	
 	public int getNumOfPanels()
@@ -162,7 +164,15 @@ public class MyJFrame extends JFrame implements ActionListener{
 		switch(e.getActionCommand())
 		{
 		case "size1":
-			System.out.println("Button1 was pressed");
+			chosenSize = 1;
+			break;
+		
+		case "size2":
+			chosenSize = 2;
+			break;
+			
+		case "size3":
+			chosenSize = 2;
 			break;
 		}
 	}
@@ -174,6 +184,8 @@ public class MyJFrame extends JFrame implements ActionListener{
 		MyJPanel buttonPanel = new MyJPanel(this.getNumOfPanels(), new FlowLayout());
 		this.addPanelToList(buttonPanel);
 		askingPanel.add(buttonPanel, BorderLayout.CENTER);
+		JLabel upperLabel = new JLabel("Please Choose Your Maze Size", (int) JLabel.CENTER_ALIGNMENT);
+		this.addComponentToPanel(upperLabel, BorderLayout.NORTH, askingPanel.getListLocation());
 		this.addPanelToFrame(askingPanel.getListLocation(), BorderLayout.CENTER);
 		this.remove(this.getMainPane());
 		//readd it later
