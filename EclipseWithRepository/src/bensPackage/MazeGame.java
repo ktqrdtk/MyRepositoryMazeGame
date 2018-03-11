@@ -28,16 +28,25 @@ public class MazeGame
         }
         
         MazeGame mzGm = new MazeGame();
-		javax.swing.SwingUtilities.invokeLater(new Runnable()
-				{
-					public void run()
-					{
-						mzGm.createAndShowGUI();
-						mzGm.frame.askForSize();
-					}
-				});
+		mzGm.createAndShowGUI();
+		mzGm.frame.askForSize();
+		//waits till size is chosen
+		while(mzGm.frame.getChosenSize() == -1)
+		{
+			try 
+			{
+				Thread.sleep(1000);
+			} 
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
+		Maze maze = new Maze((int)Math.pow(mzGm.frame.getChosenSize(), 2));
+		mzGm.frame.setText(maze.getString());
 	}
 	
 	public void readFile(int input)
@@ -61,7 +70,7 @@ public class MazeGame
 		MyJButton button1 = new MyJButton("Button1", AbstractButton.CENTER, "button1");
 		MyJButton button2 = new MyJButton("Button2", AbstractButton.CENTER, "button1");
 		MyJButton button3 = new MyJButton("Button3", AbstractButton.CENTER, "button1");
-		MyJButton button4 = new MyJButton("Hey Herschi", AbstractButton.TRAILING, "commandHere");
+		MyJButton button4 = new MyJButton("Hey", AbstractButton.TRAILING, "commandHere");
 		button1.setPreferredSize(new Dimension(50, 50));
 		
 		JLabel label1 = new JLabel("WestFiller");

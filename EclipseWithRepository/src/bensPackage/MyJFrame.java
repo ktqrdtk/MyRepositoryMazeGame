@@ -2,6 +2,7 @@ package bensPackage;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,8 @@ public class MyJFrame extends JFrame implements ActionListener{
 		panelList.add(panel);
 		this.add(panelList.get(panel.getListLocation()));
 		this.chosenSize = -1;
+		txtArea = new TextArea();
+		txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 36));
 	}
 	
 	public int getNumOfPanels()
@@ -114,6 +117,8 @@ public class MyJFrame extends JFrame implements ActionListener{
 		{
 			//will error when txtarea hasnt been set, which is fine
 		}
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public void addText(String input, Boolean withEnterAfter, int panelNum)
@@ -182,6 +187,11 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.setText(String.valueOf(this.chosenSize));
 		this.revalidate();
 		this.repaint();
+	}
+	
+	public int getChosenSize()
+	{
+		return this.chosenSize;
 	}
 	
 	public void askForSize()

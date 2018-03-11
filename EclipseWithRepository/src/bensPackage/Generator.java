@@ -13,11 +13,6 @@ public class Generator {
 	private boolean top;
 	private boolean bottom;
 	
-	public void combine()
-	{
-		
-	}
-	
 	public Grid[][] setMaze(int size)
 	{
 		this.size = size;
@@ -58,10 +53,10 @@ public class Generator {
 	public Grid[][] maze4()
 	{
 		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
-		Grid grid00 = getRandomChunk(false, true, false, true);
-		Grid grid01 = getRandomChunk(false, true, true, false);
-		Grid grid10 = getRandomChunk(true, false, false, true);
-		Grid grid11 = getRandomChunk(true, false, true, false);
+		Grid grid00 = getRandomChunkBottomRight();
+		Grid grid01 = getRandomChunkLeftBottom();
+		Grid grid10 = getRandomChunkTopRight();
+		Grid grid11 = getRandomChunkTopLeft();
 		theGrid[0][0] = grid00;
 		theGrid[0][1] = grid01;
 		theGrid[1][0] = grid10;
@@ -89,6 +84,36 @@ public class Generator {
 		return randomGrid;
 	}
 	
+	public static Grid getRandomChunkTopBottom()
+	{
+		return getRandomChunk(true, true, false, false);
+	}
+	
+	public static Grid getRandomChunkTopLeft()
+	{
+		return getRandomChunk(true, false, true, false);
+	}
+	
+	public static Grid getRandomChunkTopRight()
+	{
+		return getRandomChunk(true, false, false, true);
+	}
+	
+	public static Grid getRandomChunkLeftRight()
+	{
+		return getRandomChunk(false, false, true, true);
+	}
+	
+	public static Grid getRandomChunkLeftBottom()
+	{
+		return getRandomChunk(false, true, true, false);
+	}
+	
+	public static Grid getRandomChunkBottomRight()
+	{
+		return getRandomChunk(false, true, false, true);
+	}
+	
 	public static Grid getRandomChunk(boolean top, boolean bottom, boolean left, boolean right)
 
 	{
@@ -108,14 +133,14 @@ public class Generator {
 		{
 			while(!(randomGrid.hasTopEz() && randomGrid.hasBottomEz()))
 			{
-				randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
-				randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
-				listOfUnusedIndexes.remove(randomIndexForIndexes);
 				try
 				{
+					randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
+					randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
+					listOfUnusedIndexes.remove(randomIndexForIndexes);
 					randomGrid = MazeReader.listOfGrids.get(randomIndex);
 				}
-				catch(IndexOutOfBoundsException ex)
+				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
 					break;
@@ -126,14 +151,14 @@ public class Generator {
 		{
 			while(!(randomGrid.hasTopEz() && randomGrid.hasLeftEz()))
 			{
-				randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
-				randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
-				listOfUnusedIndexes.remove(randomIndexForIndexes);
 				try
 				{
+					randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
+					randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
+					listOfUnusedIndexes.remove(randomIndexForIndexes);
 					randomGrid = MazeReader.listOfGrids.get(randomIndex);
 				}
-				catch(IndexOutOfBoundsException ex)
+				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
 					break;
@@ -144,14 +169,14 @@ public class Generator {
 		{
 			while(!(randomGrid.hasTopEz() && randomGrid.hasRightEz()))
 			{
-				randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
-				randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
-				listOfUnusedIndexes.remove(randomIndexForIndexes);
 				try
 				{
+					randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
+					randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
+					listOfUnusedIndexes.remove(randomIndexForIndexes);
 					randomGrid = MazeReader.listOfGrids.get(randomIndex);
 				}
-				catch(IndexOutOfBoundsException ex)
+				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
 					break;
@@ -162,14 +187,14 @@ public class Generator {
 		{
 			while(!(randomGrid.hasBottomEz() && randomGrid.hasLeftEz()))
 			{
-				randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
-				randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
-				listOfUnusedIndexes.remove(randomIndexForIndexes);
 				try
 				{
+					randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
+					randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
+					listOfUnusedIndexes.remove(randomIndexForIndexes);
 					randomGrid = MazeReader.listOfGrids.get(randomIndex);
 				}
-				catch(IndexOutOfBoundsException ex)
+				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
 					break;
@@ -180,14 +205,14 @@ public class Generator {
 		{
 			while(!(randomGrid.hasBottomEz() && randomGrid.hasRightEz()))
 			{
-				randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
-				randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
-				listOfUnusedIndexes.remove(randomIndexForIndexes);
 				try
 				{
+					randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
+					randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
+					listOfUnusedIndexes.remove(randomIndexForIndexes);
 					randomGrid = MazeReader.listOfGrids.get(randomIndex);
 				}
-				catch(IndexOutOfBoundsException ex)
+				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
 					break;
@@ -198,14 +223,14 @@ public class Generator {
 		{
 			while(!(randomGrid.hasRightEz() && randomGrid.hasLeftEz()))
 			{
-				randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
-				randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
-				listOfUnusedIndexes.remove(randomIndexForIndexes);
 				try
 				{
+					randomIndexForIndexes = randomizer.nextInt(listOfUnusedIndexes.size());
+					randomIndex = listOfUnusedIndexes.get(randomIndexForIndexes);
+					listOfUnusedIndexes.remove(randomIndexForIndexes);
 					randomGrid = MazeReader.listOfGrids.get(randomIndex);
 				}
-				catch(IndexOutOfBoundsException ex)
+				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
 					break;
