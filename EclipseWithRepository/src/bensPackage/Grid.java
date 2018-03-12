@@ -176,7 +176,7 @@ public class Grid {
 		return this.right;
 	}
 	
-	public String toString()
+	public String getString()
 	{
 		String returnString = "";
 		for(int i = 0; i < grid.length; i++)
@@ -193,6 +193,17 @@ public class Grid {
 			{
 				returnString = returnString + "\n";
 			}
+		}
+		
+		return returnString;
+	}
+	
+	public String getRow(int rowNum)
+	{
+		String returnString = "";
+		for(int i = 0; i < this.grid[rowNum].length; i++)
+		{
+			returnString = returnString + grid[rowNum][i];
 		}
 		
 		return returnString;

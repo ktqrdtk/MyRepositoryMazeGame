@@ -5,7 +5,6 @@ public class Maze {
 	
 	private int numOfGrids;
 	private Grid[][] maze;
-	String mazeInString;
 	
 	public Maze(int numOfGrids)
 	{
@@ -16,14 +15,20 @@ public class Maze {
 	
 	public String getString()
 	{
-		mazeInString = "";
-		for(int i = 0; i < maze.length; i++)
-		{
-			for(int j = 0; j < maze.length; j++)
+		String mazeInString = "";
+			for(int i = 0; i < maze.length; i++)
 			{
-				mazeInString = mazeInString + maze[i][j] + " ";
+				for(int j = 0; j < maze[i].length; j++)
+				{
+					for(int k = 0; k < maze[i][j].getGrid().length; k++)
+					{
+						for(int l = 0; l < maze[i][j].getGrid()[k].length; l++)
+						{
+							mazeInString = mazeInString + maze[i][j].getGrid()[k][l];
+						}
+					}
+				}
 			}
-		}
 		return mazeInString;
 	}
 	
