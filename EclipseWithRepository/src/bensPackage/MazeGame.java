@@ -47,7 +47,7 @@ public class MazeGame
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
 		Maze maze = new Maze((int)Math.pow(mzGm.frame.getChosenSize(), 2));
-		mzGm.frame.setText(maze.getString(true));
+		mzGm.frame.displayMazes(maze);
 	}
 	
 	public void readFile(int input)
@@ -80,12 +80,6 @@ public class MazeGame
 		JLabel label3 = new JLabel("SouthFiller", AbstractButton.CENTER);
 		label3.setPreferredSize(new Dimension(50, 50));
 		
-		TextArea txtArea = new TextArea("", 0, 0, TextArea.SCROLLBARS_NONE);
-		txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-		txtArea.setEditable(false);
-		txtArea.setBackground(new Color(00, 143, 00));
-		inputFrame.setText("You didn't choose your size.");
-		
 		MyJPanel upperPanel = new MyJPanel(inputFrame.getNumOfPanels());
 		inputFrame.addPanelToList(upperPanel);
 		upperPanel.setLayout(new GridBagLayout());
@@ -98,7 +92,6 @@ public class MazeGame
 		inputFrame.addComponentToPanel(label1, BorderLayout.WEST, inputFrame.getMainPane().getListLocation());
 		inputFrame.addComponentToPanel(label2, BorderLayout.EAST, inputFrame.getMainPane().getListLocation());
 		inputFrame.addComponentToPanel(label3, BorderLayout.SOUTH, inputFrame.getMainPane().getListLocation());
-		inputFrame.addComponentToPanel(txtArea, BorderLayout.CENTER ,inputFrame.getMainPane().getListLocation());
 		inputFrame.addActionListeners();
 	}
 	

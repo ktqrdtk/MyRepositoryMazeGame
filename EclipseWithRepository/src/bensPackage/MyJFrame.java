@@ -1,8 +1,10 @@
 package bensPackage;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
@@ -20,8 +22,6 @@ public class MyJFrame extends JFrame implements ActionListener{
 	private ArrayList<MyJPanel> panelList;
 	private ArrayList<JButton> listOfButtons;
 	private ArrayList<JLabel> listOfLabels;
-	private String currentText;
-	private TextArea txtArea;
 	private int chosenSize;
 	private MyJPanel askingPanel;
 	
@@ -104,12 +104,12 @@ public class MyJFrame extends JFrame implements ActionListener{
 
 	}
 	
-	public void setText(String input)
+	public void setText(String input, TextArea txtArea)
 	{
-		this.currentText = input;
+		String currentText = input;
 		try
 		{
-			this.txtArea.setText(currentText);
+			txtArea.setText(currentText);
 		}
 		catch(Exception ex)
 		{
@@ -119,25 +119,23 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.repaint();
 	}
 	
-	public void addText(String input, Boolean withEnterAfter, int panelNum)
+	public void addText(String input, Boolean withEnterAfter, int panelNum, TextArea txtArea)
 	{
 		if(withEnterAfter)
 		{
-			this.txtArea.append(input + "\n");
+			txtArea.append(input + "\n");
 		}
 		else
 		{
-			this.txtArea.append(input);
+			txtArea.append(input);
 		}
 		
-		this.panelList.get(panelNum).repaint();
+		panelList.get(panelNum).repaint();
 	}
 	
 	public void addComponentToPanel(TextArea theTextArea, String location, int panelNum)
 	{
-		this.txtArea = theTextArea;
-		txtArea.setText(currentText);
-		this.panelList.get(panelNum).add(txtArea, location);
+		this.panelList.get(panelNum).add(theTextArea, location);
 		this.revalidate();
 		this.repaint();
 	}
@@ -182,7 +180,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		this.remove(askingPanel);
 		this.add(this.getMainPane());
-		this.setText(String.valueOf(this.chosenSize));
+		this.setText(String.valueOf(this.chosenSize), new TextArea());
 		this.revalidate();
 		this.repaint();
 	}
@@ -222,6 +220,26 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.addComponentToPanelNonLayout(b2, inputPanel.getListLocation());
 		//this ^^ and this vvv do the same thing just call them differently
 		this.addComponentToPanel(b3, "noLayout", inputPanel.getListLocation());
+	}
+	
+	public void displayMazes(Maze maze)
+	{
+		GridLayout gridLayout = new GridLayout(maze.getSize(), maze.getSize());
+		int curLocation = 0;
+		MyJPanel centerPanel = new MyJPanel(this.panelList.size(), gridLayout);
+		for(int i = 0; i < maze.getMaze().length; i++)
+		{
+			for(int j = 0; j < maze.getMaze()[i].length; j++)
+			{
+				TextArea txtArea = new TextArea("", 0, 0, TextArea.SCROLLBARS_NONE);
+				txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+				txtArea.setEditable(false);
+				txtArea.setBackground(new Color(00, 143, 00));
+				txtArea.setText(maze.getString(curLocation, true));
+				this.addComponentToPanel(txtArea, , this.getMainPane().getListLocation());
+				curLocation++;
+			}
+		}
 	}
 	
 }
