@@ -67,6 +67,16 @@ public class Generator {
 	public Grid[][] maze9()
 	{
 		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
+		theGrid[0][0] = getRandomChunkTopLeft();
+		theGrid[0][1] = ;
+		theGrid[0][2] = ;
+		theGrid[1][0] = ;
+		theGrid[1][1] = ;
+		theGrid[1][2] = ;
+		theGrid[2][0] = ;
+		theGrid[2][1] = ;
+		theGrid[2][2] = getRandomChunkBottomRight();
+		
 		return theGrid;
 	}
 	

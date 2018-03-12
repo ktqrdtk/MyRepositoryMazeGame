@@ -2,6 +2,7 @@ package bensPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -10,6 +11,7 @@ import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
@@ -29,6 +31,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		super(input);
 		MyJPanel panel = new MyJPanel(0);
+		panel.setPreferredSize(new Dimension(200, 200));
 		panel.setLayout(layout);
 		listOfButtons = new ArrayList<JButton>();
 		listOfLabels = new ArrayList<JLabel>();
@@ -62,11 +65,15 @@ public class MyJFrame extends JFrame implements ActionListener{
 	public void addPanelToFrame(int index, String location)
 	{
 		this.add(panelList.get(index), location);
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public void addPanelToMainPanel(int index, String location)
 	{
 		this.getMainPane().add(panelList.get(index), location);
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public void addComponentToPanelNonLayout(JButton input, int panelNum)
@@ -135,9 +142,18 @@ public class MyJFrame extends JFrame implements ActionListener{
 	
 	public void addComponentToPanel(TextArea theTextArea, String location, int panelNum)
 	{
-		this.panelList.get(panelNum).add(theTextArea, location);
-		this.revalidate();
-		this.repaint();
+		if(!(location.equals("irregular")))
+		{
+			this.panelList.get(panelNum).add(theTextArea, location);
+			this.revalidate();
+			this.repaint();
+		}
+		else
+		{
+			this.panelList.get(panelNum).add(theTextArea);
+			this.revalidate();
+			this.repaint();
+		}
 	}
 	
 	public MyJPanel getPanel(int panelNum)
@@ -226,20 +242,29 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		GridLayout gridLayout = new GridLayout(maze.getSize(), maze.getSize());
 		int curLocation = 0;
+		Random random = new Random();
+		int num1 = random.nextInt(250);
+		int num2 = random.nextInt(250);
+		int num3 = random.nextInt(250);
 		MyJPanel centerPanel = new MyJPanel(this.panelList.size(), gridLayout);
+		this.addPanelToList(centerPanel);
 		for(int i = 0; i < maze.getMaze().length; i++)
 		{
 			for(int j = 0; j < maze.getMaze()[i].length; j++)
 			{
-				TextArea txtArea = new TextArea("", 0, 0, TextArea.SCROLLBARS_NONE);
-				txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+				num1 = random.nextInt(250);
+				num2 = random.nextInt(250);
+				num3 = random.nextInt(250);
+				TextArea txtArea = new TextArea("", 5, 10, TextArea.SCROLLBARS_NONE);
+				txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 36));
 				txtArea.setEditable(false);
-				txtArea.setBackground(new Color(00, 143, 00));
+				txtArea.setBackground(new Color(num1, num2, num3));
 				txtArea.setText(maze.getString(curLocation, true));
-				this.addComponentToPanel(txtArea, , this.getMainPane().getListLocation());
+				this.addComponentToPanel(txtArea, "irregular", centerPanel.getListLocation());
 				curLocation++;
 			}
 		}
+		this.addPanelToMainPanel(centerPanel.getListLocation(), BorderLayout.CENTER);
 	}
 	
 }

@@ -47,6 +47,7 @@ public class MazeGame
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
 		Maze maze = new Maze((int)Math.pow(mzGm.frame.getChosenSize(), 2));
+		System.out.println((int)Math.pow(mzGm.frame.getChosenSize(), 2));
 		mzGm.frame.displayMazes(maze);
 	}
 	
