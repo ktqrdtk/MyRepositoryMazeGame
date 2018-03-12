@@ -13,7 +13,7 @@ public class Maze {
 		maze = myGen.setMaze(numOfGrids);
 	}
 	
-	public String getString()
+	public String getString(boolean hasSpaces)
 	{
 		String mazeInString = "";
 			for(int i = 0; i < maze.length; i++)
@@ -25,6 +25,14 @@ public class Maze {
 						for(int l = 0; l < maze[i][j].getGrid()[k].length; l++)
 						{
 							mazeInString = mazeInString + maze[i][j].getGrid()[k][l];
+							if((l < maze[i][j].getGrid()[k].length - 1) && hasSpaces)
+							{
+								mazeInString += " ";
+							}
+						}
+						if(k < (maze[i][j].getGrid().length - 1))
+						{
+							mazeInString += "\n";
 						}
 					}
 				}

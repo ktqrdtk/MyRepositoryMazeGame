@@ -36,8 +36,6 @@ public class MyJFrame extends JFrame implements ActionListener{
 		panelList.add(panel);
 		this.add(panelList.get(panel.getListLocation()));
 		this.chosenSize = -1;
-		txtArea = new TextArea();
-		txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 36));
 	}
 	
 	public int getNumOfPanels()

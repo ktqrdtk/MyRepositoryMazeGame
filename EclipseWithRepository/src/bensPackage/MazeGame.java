@@ -3,6 +3,7 @@ package bensPackage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.TextArea;
 import java.io.File;
@@ -46,7 +47,7 @@ public class MazeGame
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
 		Maze maze = new Maze((int)Math.pow(mzGm.frame.getChosenSize(), 2));
-		mzGm.frame.setText(maze.getString());
+		mzGm.frame.setText(maze.getString(true));
 	}
 	
 	public void readFile(int input)
@@ -79,10 +80,11 @@ public class MazeGame
 		JLabel label3 = new JLabel("SouthFiller", AbstractButton.CENTER);
 		label3.setPreferredSize(new Dimension(50, 50));
 		
-		TextArea txtArea = new TextArea();
+		TextArea txtArea = new TextArea("", 0, 0, TextArea.SCROLLBARS_NONE);
+		txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 		txtArea.setEditable(false);
 		txtArea.setBackground(new Color(00, 143, 00));
-		inputFrame.setText("Blah Blah Blah");
+		inputFrame.setText("You didn't choose your size.");
 		
 		MyJPanel upperPanel = new MyJPanel(inputFrame.getNumOfPanels());
 		inputFrame.addPanelToList(upperPanel);

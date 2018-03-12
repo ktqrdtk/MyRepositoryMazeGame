@@ -143,6 +143,7 @@ public class Generator {
 				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
+					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
 			}
@@ -161,6 +162,7 @@ public class Generator {
 				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
+					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
 			}
@@ -179,6 +181,7 @@ public class Generator {
 				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
+					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
 			}
@@ -197,6 +200,7 @@ public class Generator {
 				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
+					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
 			}
@@ -215,6 +219,7 @@ public class Generator {
 				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
+					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
 			}
@@ -233,6 +238,7 @@ public class Generator {
 				catch(Exception ex)
 				{
 					System.out.println("No grids apply");
+					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
 			}
