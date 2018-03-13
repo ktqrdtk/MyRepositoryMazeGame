@@ -47,7 +47,6 @@ public class MazeGame
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
 		Maze maze = new Maze((int)Math.pow(mzGm.frame.getChosenSize(), 2));
-		System.out.println((int)Math.pow(mzGm.frame.getChosenSize(), 2));
 		mzGm.frame.displayMazes(maze);
 	}
 	
@@ -73,13 +72,10 @@ public class MazeGame
 		MyJButton button2 = new MyJButton("Button2", AbstractButton.CENTER, "button1");
 		MyJButton button3 = new MyJButton("Button3", AbstractButton.CENTER, "button1");
 		MyJButton button4 = new MyJButton("Hey", AbstractButton.TRAILING, "commandHere");
-		button1.setPreferredSize(new Dimension(50, 50));
 		
-		JLabel label1 = new JLabel("WestFiller");
-		JLabel label2 = new JLabel("EastFiller", AbstractButton.CENTER);
-		label2.setPreferredSize(new Dimension(50, 0));
-		JLabel label3 = new JLabel("SouthFiller", AbstractButton.CENTER);
-		label3.setPreferredSize(new Dimension(50, 50));
+		JLabel label1 = new JLabel();
+		JLabel label2 = new JLabel();
+		JLabel label3 = new JLabel();
 		
 		MyJPanel upperPanel = new MyJPanel(inputFrame.getNumOfPanels());
 		inputFrame.addPanelToList(upperPanel);

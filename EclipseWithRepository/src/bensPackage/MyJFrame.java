@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.AbstractButton;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -240,7 +241,9 @@ public class MyJFrame extends JFrame implements ActionListener{
 	
 	public void displayMazes(Maze maze)
 	{
-		GridLayout gridLayout = new GridLayout(maze.getSize(), maze.getSize());
+		GridLayout gridLayout = new GridLayout(0, maze.getSize());
+		gridLayout.setHgap(0);
+		gridLayout.setVgap(0);
 		int curLocation = 0;
 		Random random = new Random();
 		int num1 = random.nextInt(250);
@@ -248,6 +251,8 @@ public class MyJFrame extends JFrame implements ActionListener{
 		int num3 = random.nextInt(250);
 		MyJPanel centerPanel = new MyJPanel(this.panelList.size(), gridLayout);
 		this.addPanelToList(centerPanel);
+		this.revalidate();
+		this.repaint();
 		for(int i = 0; i < maze.getMaze().length; i++)
 		{
 			for(int j = 0; j < maze.getMaze()[i].length; j++)
@@ -256,7 +261,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 				num2 = random.nextInt(250);
 				num3 = random.nextInt(250);
 				TextArea txtArea = new TextArea("", 5, 10, TextArea.SCROLLBARS_NONE);
-				txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 36));
+				txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, maze.getFontSize()));
 				txtArea.setEditable(false);
 				txtArea.setBackground(new Color(num1, num2, num3));
 				txtArea.setText(maze.getString(curLocation, true));
@@ -264,6 +269,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 				curLocation++;
 			}
 		}
+		
 		this.addPanelToMainPanel(centerPanel.getListLocation(), BorderLayout.CENTER);
 	}
 	

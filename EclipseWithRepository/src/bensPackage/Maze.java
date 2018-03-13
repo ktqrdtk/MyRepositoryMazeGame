@@ -72,6 +72,18 @@ public class Maze {
 		return returnString;
 	}
 	
+	public int getFontSize()
+	{
+		if(this.getSize() == 1)
+		{
+			return 48;
+		}
+		else
+		{
+			return 24;
+		}
+	}
+	
 	public Grid getGrid(int location)
 	{
 		if(this.getSize() == 1)
