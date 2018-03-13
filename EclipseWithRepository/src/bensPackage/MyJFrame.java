@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.TextArea;
@@ -27,6 +28,8 @@ public class MyJFrame extends JFrame implements ActionListener{
 	private ArrayList<JLabel> listOfLabels;
 	private int chosenSize;
 	private MyJPanel askingPanel;
+	private Font font;
+	private int textAreaWidth;
 	
 	public MyJFrame(String input, LayoutManager layout)
 	{
@@ -261,16 +264,36 @@ public class MyJFrame extends JFrame implements ActionListener{
 				num2 = random.nextInt(250);
 				num3 = random.nextInt(250);
 				TextArea txtArea = new TextArea("", 5, 10, TextArea.SCROLLBARS_NONE);
-				txtArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, maze.getFontSize()));
+				this.font = new Font(Font.MONOSPACED, Font.PLAIN, maze.getFontSize());
+				txtArea.setFont(this.font);
 				txtArea.setEditable(false);
 				txtArea.setBackground(new Color(num1, num2, num3));
 				txtArea.setText(maze.getString(curLocation, true));
 				this.addComponentToPanel(txtArea, "irregular", centerPanel.getListLocation());
 				curLocation++;
+				this.textAreaWidth = txtArea.getWidth();
 			}
 		}
 		
 		this.addPanelToMainPanel(centerPanel.getListLocation(), BorderLayout.CENTER);
+	}
+	
+	public Font getFont()
+	{
+		return this.font;
+	}
+	
+	public int getTextAreaWidth()
+	{
+		return this.textAreaWidth;
+	}
+	
+	public void increaseWidthLabels(JLabel label1, JLabel label2, double howMuch)
+	{
+		label1.setPreferredSize(new Dimension(label1.getPreferredSize().width + (int)(.5 + (howMuch / 2)), label1.getPreferredSize().height));
+		label2.setPreferredSize(new Dimension(label2.getPreferredSize().width + (int)(.5 + (howMuch / 2)), label2.getPreferredSize().height));
+		revalidate();
+		repaint();
 	}
 	
 }
