@@ -66,11 +66,15 @@ public class MazeGame
 		westLabel.setText("West");
 		if(this.maze.getSize() == 1)
 		{
-			while(metric.stringWidth(exampleWidth) <= 500)
+			int j = 0;
+			System.out.println(this.frame.getTextAreaWidth());
+			while(metric.stringWidth(exampleWidth) + 10 < this.frame.getTextAreaWidth())
 			{
-				this.frame.increaseWidthLabels(this.eastLabel, this.westLabel, 10);
+				int oldSize = eastLabel.getPreferredSize().width;
+				this.eastLabel.setPreferredSize(new Dimension(oldSize + 10, eastLabel.getPreferredSize().height));
 				this.frame.revalidate();
 				this.frame.repaint();
+				j++;
 			}
 		}
 	}

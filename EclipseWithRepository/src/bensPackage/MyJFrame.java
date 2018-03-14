@@ -271,7 +271,8 @@ public class MyJFrame extends JFrame implements ActionListener{
 				txtArea.setText(maze.getString(curLocation, true));
 				this.addComponentToPanel(txtArea, "irregular", centerPanel.getListLocation());
 				curLocation++;
-				this.textAreaWidth = txtArea.getWidth();
+				this.textAreaWidth = (int)txtArea.getBounds().getWidth();
+				System.out.println(this.textAreaWidth);
 			}
 		}
 		
@@ -288,12 +289,11 @@ public class MyJFrame extends JFrame implements ActionListener{
 		return this.textAreaWidth;
 	}
 	
-	public void increaseWidthLabels(JLabel label1, JLabel label2, double howMuch)
+	public JLabel increaseWidthLabels(JLabel label1, double howMuch)
 	{
-		label1.setPreferredSize(new Dimension(label1.getPreferredSize().width + (int)(.5 + (howMuch / 2)), label1.getPreferredSize().height));
-		label2.setPreferredSize(new Dimension(label2.getPreferredSize().width + (int)(.5 + (howMuch / 2)), label2.getPreferredSize().height));
-		revalidate();
-		repaint();
+		JLabel newLabel = new JLabel();
+		newLabel.setPreferredSize(new Dimension(label1.getPreferredSize().width, label1.getPreferredSize().height));
+		return newLabel;
 	}
 	
 }
