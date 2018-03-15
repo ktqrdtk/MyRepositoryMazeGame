@@ -68,7 +68,6 @@ public class MazeToText implements ActionListener
 	public void actionPerformed(ActionEvent evt)
 	{
 		String command = evt.getActionCommand();
-		System.out.println(command);
 		switch(command)
 		{
 		case "testMaze":
@@ -83,9 +82,9 @@ public class MazeToText implements ActionListener
 	
 	public void testMaze()
 	{
+		System.out.println(this.txtArea.getText());
 		String[] array = stringToArray(this.txtArea.getText());
 		System.out.println(array[0]);
-		System.out.println("Testing Maze");
 	}
 	
 	public void getMaze()
@@ -98,9 +97,10 @@ public class MazeToText implements ActionListener
 		String[] array = new String[12];
 		char curChar = input.charAt(0);
 		String curLine = "";
-		for(int i = 0; i < input.length(); i++)
+		for(int i = 1; i < input.length() + 1; i++)
 		{
-			curChar = input.charAt(i);
+			System.out.println("Cur char: " + curChar + " Cur line: " + curLine);
+			
 			if(curChar != '\n')
 			{
 				curLine += curChar;
@@ -110,6 +110,7 @@ public class MazeToText implements ActionListener
 				array[i] = curLine;
 				curLine = "";
 			}
+			curChar = input.charAt(i);
 		}
 		return array;
 	}
