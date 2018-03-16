@@ -1,23 +1,27 @@
 package tools;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-public class MazeToText implements ActionListener 
+public class MazeToText implements ActionListener
 {
 	private JButton testButton, getButton;
 	private JTextArea txtArea;
 	private JPanel buttonPanel, mainPanel;
 	private JFrame frame;
-	
-	
+	private boolean valid;
 	
 	public static void main(String[] args)
 	{
@@ -27,6 +31,7 @@ public class MazeToText implements ActionListener
 			public void run()
 			{
 				MazeToText main = new MazeToText();
+				main.valid = false;
 				main.createGui();
 			}
 		});
@@ -61,6 +66,31 @@ public class MazeToText implements ActionListener
 		buttonPanel.add(getButton);
 		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 		mainPanel.add(txtArea, BorderLayout.CENTER);
+		txtArea.getDocument().addDocumentListener(new DocumentListener()
+				{
+
+					@Override
+					public void changedUpdate(DocumentEvent arg0) 
+					{
+						valid = false;
+						getButton.setEnabled(false);
+					}
+
+					@Override
+					public void insertUpdate(DocumentEvent arg0) 
+					{
+						valid = false;
+						getButton.setEnabled(false);
+					}
+
+					@Override
+					public void removeUpdate(DocumentEvent arg0) 
+					{
+						valid = false;
+						getButton.setEnabled(false);
+					}
+			
+				});
 		frame.revalidate();
 		frame.repaint();
 	}
@@ -80,11 +110,28 @@ public class MazeToText implements ActionListener
 		}
 	}
 	
-	public void testMaze()
+	public boolean testMaze()
 	{
-		System.out.println(this.txtArea.getText());
-		String[] array = stringToArray(this.txtArea.getText());
-		System.out.println(array[0]);
+		try
+		{
+			String[] array = stringToArray(this.txtArea.getText());
+		}
+		catch(StringLengthIncorrect ex)
+		{
+			System.out.println("Invalid");
+			this.txtArea.setBackground(Color.RED);
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {public void run() {SwingUtilities.invokeLater(new Runnable() {public void run() {txtArea.setBackground(Color.BLUE);}});}}, 3000);
+			this.getButton.setEnabled(false);
+			return false;
+		}
+		System.out.println("Valid");
+		this.txtArea.setBackground(Color.GREEN);
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {public void run() {SwingUtilities.invokeLater(new Runnable() {public void run() {txtArea.setBackground(Color.BLUE);}});}}, 3000);
+		this.valid = true;
+		this.getButton.setEnabled(true);
+		return true;
 	}
 	
 	public void getMaze()
@@ -92,27 +139,27 @@ public class MazeToText implements ActionListener
 		
 	}
 	
-	public static String[] stringToArray(String input)
+	public static String[] stringToArray(String input) throws StringLengthIncorrect
 	{
-		String[] array = new String[12];
-		char curChar = input.charAt(0);
-		String curLine = "";
-		for(int i = 1; i < input.length() + 1; i++)
+		try
 		{
-			System.out.println("Cur char: " + curChar + " Cur line: " + curLine);
-			
-			if(curChar != '\n')
+			String[] returnString = new String[12];
+			String curString = "";
+			for(int i = 0; i < 12; i++)
 			{
-				curLine += curChar;
+				curString = input.substring(i * 13, (i * 13) + 12);
+				if(curString.length() != 13)
+				{
+					throw new StringLengthIncorrect();
+				}
+				returnString[i] = curString;
 			}
-			else
-			{
-				array[i] = curLine;
-				curLine = "";
-			}
-			curChar = input.charAt(i);
+			return returnString;
 		}
-		return array;
+		catch(Exception ex)
+		{
+			throw new StringLengthIncorrect();
+		}
 	}
 
 }
