@@ -131,7 +131,7 @@ public class MazeToText implements ActionListener
 			String[] array = stringToArray(this.txtArea.getText());
 			entrancesCorrect(array);
 		}
-		catch(StringLengthIncorrect ex)
+		catch(NoSuchFieldException ex)
 		{
 			this.txtArea.setBackground(Color.RED);
 			Timer timer = new Timer();
@@ -147,10 +147,10 @@ public class MazeToText implements ActionListener
 		return true;
 	}
 	
-	public static void entrancesCorrect(String[] array) throws StringLengthIncorrect
+	public static void entrancesCorrect(String[] array) throws NoSuchFieldException
 	{
 		int enterCount = 0;
-		StringLengthIncorrect exce = new StringLengthIncorrect();
+		NoSuchFieldException exce = new NoSuchFieldException();
 		if(array[0].charAt(6) == ' ')
 		{
 			enterCount++;
@@ -184,7 +184,8 @@ public class MazeToText implements ActionListener
 			{
 				File file = new File("MazeX");
 				bwriter = new BufferedWriter(new FileWriter(file));
-				bwriter.write(this.txtArea.getText().substring(156));
+				bwriter.write(this.txtArea.getText());
+				System.out.print(this.txtArea.getText().substring(3));
 			}
 			catch(Exception ex)
 			{
@@ -208,7 +209,7 @@ public class MazeToText implements ActionListener
 		}
 	}
 	
-	public static String[] stringToArray(String input) throws StringLengthIncorrect
+	public static String[] stringToArray(String input) throws NoSuchFieldException
 	{
 		try
 		{
@@ -219,7 +220,7 @@ public class MazeToText implements ActionListener
 				curString = input.substring(i * 13, (i * 13) + 13);
 				if(curString.length() != 13)
 				{
-					throw new StringLengthIncorrect();
+					throw new NoSuchFieldException();
 				}
 				returnString[i] = curString;
 			}
@@ -228,7 +229,7 @@ public class MazeToText implements ActionListener
 		catch(Exception ex)
 		{
 			System.out.println("Incorrect Size, cannot convert to array");
-			throw new StringLengthIncorrect();
+			throw new NoSuchFieldException();
 		}
 	}
 

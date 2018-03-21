@@ -67,7 +67,7 @@ public class MazeGame
 		if(this.maze.getSize() == 1)
 		{
 			int j = 0;
-			System.out.println(this.frame.getTextAreaWidth());
+			//System.out.println(this.frame.getTextAreaWidth());
 			while(metric.stringWidth(exampleWidth) + 10 < this.frame.getTextAreaWidth())
 			{
 				int oldSize = eastLabel.getPreferredSize().width;

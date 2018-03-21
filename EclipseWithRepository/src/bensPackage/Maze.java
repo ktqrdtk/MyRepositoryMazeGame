@@ -6,10 +6,12 @@ public class Maze {
 	private int numOfGrids;
 	private Grid[][] maze;
 	private int fontSize;
+	private int size;
 	
 	public Maze(int numOfGrids)
 	{
 		this.numOfGrids = numOfGrids;
+		this.size = (int)Math.sqrt(numOfGrids);
 		Generator myGen = new Generator();
 		maze = myGen.setMaze(numOfGrids);
 		if(getSize() == 1)
@@ -90,7 +92,7 @@ public class Maze {
 		return this.fontSize;
 	}
 	
-	public Grid getGrid(int location)
+	/*public Grid getGrid(int location)
 	{
 		if(this.getSize() == 1)
 		{
@@ -156,6 +158,22 @@ public class Maze {
 		}
 		return null;
 		
+	}*/
+	
+	public Grid getGrid(int location)
+	{
+		int x = 0;
+		int y = 0;
+		for(int i = 0; i < location; i++)
+		{
+			x++;
+		}
+		while(x >= size)
+		{
+			x-= size;
+			y++;
+		}
+		return maze[x][y];
 	}
 	
 }

@@ -272,7 +272,6 @@ public class MyJFrame extends JFrame implements ActionListener{
 				this.addComponentToPanel(txtArea, "irregular", centerPanel.getListLocation());
 				curLocation++;
 				this.textAreaWidth = (int)txtArea.getBounds().getWidth();
-				System.out.println(this.textAreaWidth);
 			}
 		}
 		
