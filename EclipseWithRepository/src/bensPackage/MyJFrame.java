@@ -19,6 +19,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 @SuppressWarnings({"serial"})
 public class MyJFrame extends JFrame implements ActionListener{
@@ -35,7 +37,6 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		super(input);
 		MyJPanel panel = new MyJPanel(0);
-		panel.setPreferredSize(new Dimension(200, 200));
 		panel.setLayout(layout);
 		listOfButtons = new ArrayList<JButton>();
 		listOfLabels = new ArrayList<JLabel>();
@@ -115,7 +116,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 
 	}
 	
-	public void setText(String input, TextArea txtArea)
+	public void setText(String input, JTextArea txtArea)
 	{
 		String currentText = input;
 		try
@@ -130,7 +131,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.repaint();
 	}
 	
-	public void addText(String input, Boolean withEnterAfter, int panelNum, TextArea txtArea)
+	public void addText(String input, Boolean withEnterAfter, int panelNum, JTextArea txtArea)
 	{
 		if(withEnterAfter)
 		{
@@ -144,7 +145,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		panelList.get(panelNum).repaint();
 	}
 	
-	public void addComponentToPanel(TextArea theTextArea, String location, int panelNum)
+	public void addComponentToPanel(JTextArea theTextArea, String location, int panelNum)
 	{
 		if(!(location.equals("irregular")))
 		{
@@ -200,7 +201,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 	{
 		this.remove(askingPanel);
 		this.add(this.getMainPane());
-		this.setText(String.valueOf(this.chosenSize), new TextArea());
+		this.setText(String.valueOf(this.chosenSize), new JTextArea());
 		this.revalidate();
 		this.repaint();
 	}
@@ -252,8 +253,12 @@ public class MyJFrame extends JFrame implements ActionListener{
 		int num1 = random.nextInt(250);
 		int num2 = random.nextInt(250);
 		int num3 = random.nextInt(250);
-		MyJPanel centerPanel = new MyJPanel(this.panelList.size(), gridLayout);
+		MyJPanel centerPanel = new MyJPanel(this.panelList.size(), true);
 		this.addPanelToList(centerPanel);
+		FlowLayout noGapLayout = new FlowLayout();
+		noGapLayout.setHgap(1);
+		noGapLayout.setVgap(1);
+		centerPanel.setLayout(noGapLayout);
 		this.revalidate();
 		this.repaint();
 		for(int i = 0; i < maze.getMaze().length; i++)
@@ -263,7 +268,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 				num1 = random.nextInt(250);
 				num2 = random.nextInt(250);
 				num3 = random.nextInt(250);
-				TextArea txtArea = new TextArea("", 5, 10, TextArea.SCROLLBARS_NONE);
+				JTextArea txtArea = new JTextArea();
 				this.font = new Font(Font.MONOSPACED, Font.PLAIN, maze.getFontSize());
 				txtArea.setFont(this.font);
 				txtArea.setEditable(false);
@@ -288,11 +293,5 @@ public class MyJFrame extends JFrame implements ActionListener{
 		return this.textAreaWidth;
 	}
 	
-	public JLabel increaseWidthLabels(JLabel label1, double howMuch)
-	{
-		JLabel newLabel = new JLabel();
-		newLabel.setPreferredSize(new Dimension(label1.getPreferredSize().width, label1.getPreferredSize().height));
-		return newLabel;
-	}
 	
 }

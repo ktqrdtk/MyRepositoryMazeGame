@@ -31,4 +31,11 @@ public class MyJPanel extends JPanel {
 		return this.listLocation;
 	}
 	
+	public MyJPanel(int location, boolean defaultLayout)
+	{
+		super();
+		listLocation = location;
+		setOpaque(false);
+	}
+	
 }

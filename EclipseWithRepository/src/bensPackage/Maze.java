@@ -16,15 +16,15 @@ public class Maze {
 		maze = myGen.setMaze(numOfGrids);
 		if(getSize() == 1)
 		{
-			fontSize = 48;
+			fontSize = 60;
 		}
 		else if(getSize() == 2)
 		{
-			fontSize = 36;
+			fontSize = 28;
 		}
 		else
 		{
-			fontSize = 24;
+			fontSize = 18;
 		}
 	}
 	

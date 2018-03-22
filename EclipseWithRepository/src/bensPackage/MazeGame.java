@@ -8,6 +8,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.TextArea;
+import java.awt.Toolkit;
 import java.io.File;
 
 import javax.swing.AbstractButton;
@@ -53,30 +54,6 @@ public class MazeGame
 		mzGm.readFile(totalNumOfMazesInFile);
 		mzGm.maze = new Maze((int)Math.pow(mzGm.frame.getChosenSize(), 2));
 		mzGm.frame.displayMazes(mzGm.maze);
-		mzGm.resizePanel();
-	}
-	
-	public void resizePanel()
-	{
-		String exampleWidth = "XXXXXXXXXXXX";
-		Graphics graphics = this.frame.getGraphics();
-		Font font = this.frame.getFont();
-		FontMetrics metric = graphics.getFontMetrics();
-		eastLabel.setText("East");
-		westLabel.setText("West");
-		if(this.maze.getSize() == 1)
-		{
-			int j = 0;
-			//System.out.println(this.frame.getTextAreaWidth());
-			while(metric.stringWidth(exampleWidth) + 10 < this.frame.getTextAreaWidth())
-			{
-				int oldSize = eastLabel.getPreferredSize().width;
-				this.eastLabel.setPreferredSize(new Dimension(oldSize + 10, eastLabel.getPreferredSize().height));
-				this.frame.revalidate();
-				this.frame.repaint();
-				j++;
-			}
-		}
 	}
 	
 	public void readFile(int input)
@@ -90,7 +67,8 @@ public class MazeGame
 		frame = new MyJFrame("Maze Game - Ben Hilton", new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPanel(frame);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setPreferredSize(new Dimension(screenSize.height, screenSize.height)); 
         frame.pack();
         frame.setVisible(true);
 	}
