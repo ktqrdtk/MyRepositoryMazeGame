@@ -178,24 +178,22 @@ public class MazeToText implements ActionListener
 		try
 		{
 			String[] array = stringToArray(this.txtArea.getText());
+			testChars(array);
 			entrancesCorrect(array);
 		}
-		catch(NumberFormatException ex)
+		catch(IncorrectChars ex)
 		{
-			this.txtArea.setBackground(Color.RED);
-			Timer timer = new Timer();
-			timer.schedule(new TimerTask() {public void run() {SwingUtilities.invokeLater(new Runnable() {public void run() {txtArea.setBackground(DEFAULTCOLOR);}});}}, 1000);
-			this.getButton.setEnabled(false);
-			this.errorArea.setText("Incorrect Size");
+			error("Invalid Character(s)");
 			return false;
 		}
-		catch(NoSuchFieldException ex)
+		catch(IncorrectDimension ex)
 		{
-			this.txtArea.setBackground(Color.RED);
-			Timer timer = new Timer();
-			timer.schedule(new TimerTask() {public void run() {SwingUtilities.invokeLater(new Runnable() {public void run() {txtArea.setBackground(DEFAULTCOLOR);}});}}, 1000);
-			this.getButton.setEnabled(false);
-			this.errorArea.setText("Incorrect Entrances");
+			error("Incorrect Size");
+			return false;
+		}
+		catch(EntrancesIncorrect ex)
+		{
+			error("Incorrect Entrances");
 			return false;
 		}
 		this.txtArea.setBackground(Color.GREEN);
@@ -203,33 +201,80 @@ public class MazeToText implements ActionListener
 		timer.schedule(new TimerTask() {public void run() {SwingUtilities.invokeLater(new Runnable() {public void run() {txtArea.setBackground(DEFAULTCOLOR);}});}}, 1000);
 		this.valid = true;
 		this.getButton.setEnabled(true);
+		this.errorArea.setText("No Errors!!! Press get maze to import the file.");
 		return true;
 	}
 	
-	public static void entrancesCorrect(String[] array) throws NoSuchFieldException
+	public static void entrancesCorrect(String[] array) throws EntrancesIncorrect
 	{
-		int enterCount = 0;
-		NoSuchFieldException exce = new NoSuchFieldException();
+		int doubleEnterCount = 0;
+		int singleEnterCount = 0;
+		int top = 0;
+		int bottom = 0;
+		int right = 0;
+		int left = 0;
+		EntrancesIncorrect exce = new EntrancesIncorrect();
+		
 		if(array[0].charAt(6) == ' ')
 		{
-			enterCount++;
+			singleEnterCount++;
+			top++;
+		}
+		if(array[0].charAt(5) == ' ')
+		{
+			singleEnterCount++;
+			top++;
 		}
 		if(array[6].charAt(0) == ' ')
 		{
-			enterCount++;
+			singleEnterCount++;
+			left++;
+		}
+		if(array[5].charAt(0) == ' ')
+		{
+			singleEnterCount++;
+			left++;
 		}
 		if(array[6].charAt(11) == ' ')
 		{
-			enterCount++;
+			singleEnterCount++;
+			right++;
 		}
-		if(array[11].charAt(6) == ' ')
+		if(array[5].charAt(11) == ' ')
 		{
-			enterCount++;
+			singleEnterCount++;
+			right++;
+		}
+		if(array[11].charAt(5) == ' ')
+		{
+			singleEnterCount++;
+			bottom++;
+		}
+		if(array[11].charAt(7) == ' ')
+		{
+			singleEnterCount++;
+			bottom++;
 		}
 		
-		if(enterCount != 2)
+		if(top == 2)
 		{
-			System.out.println("Entrances Invalid, entrances: " + enterCount);
+			doubleEnterCount++;
+		}
+		if(bottom == 2)
+		{
+			doubleEnterCount++;
+		}
+		if(right == 2)
+		{
+			doubleEnterCount++;
+		}
+		if(left == 2)
+		{
+			doubleEnterCount++;
+		}
+		
+		if(!(doubleEnterCount == 2 && singleEnterCount == 2 * doubleEnterCount))
+		{
 			throw exce;
 		}
 	}
@@ -243,7 +288,6 @@ public class MazeToText implements ActionListener
 			{
 				bwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("MazeX.txt"), "utf-8"));
 				bwriter.write(this.txtArea.getText());
-				System.out.print(this.txtArea.getText().substring(3));
 			}
 			catch(Exception ex)
 			{
@@ -267,7 +311,7 @@ public class MazeToText implements ActionListener
 		}
 	}
 	
-	public static String[] stringToArray(String input) throws NumberFormatException
+	public static String[] stringToArray(String input) throws IncorrectDimension
 	{
 		try
 		{
@@ -278,7 +322,7 @@ public class MazeToText implements ActionListener
 				curString = input.substring(i * 13, (i * 13) + 13);
 				if(curString.length() != 13)
 				{
-					throw new NumberFormatException();
+					throw new IncorrectDimension();
 				}
 				returnString[i] = curString;
 			}
@@ -287,8 +331,46 @@ public class MazeToText implements ActionListener
 		catch(Exception ex)
 		{
 			System.out.println("Incorrect Size, cannot convert to array");
-			throw new NumberFormatException();
+			throw new IncorrectDimension();
 		}
+	}
+	
+	public static void testChars(String[] array) throws IncorrectChars
+	{
+		for(int i = 0; i < array.length; i++)
+		{
+			for(int j = 0; j < array[i].length(); j++)
+			{
+				char curChar = array[i].charAt(j);
+				
+				//testAgainst returns true if it equals one of them.
+				if(!testAgainst(curChar, ' ', 'X', '|', '-', '\n', '\r'))
+				{
+					throw new IncorrectChars();
+				}
+			}
+		}
+	}
+	
+	public static boolean testAgainst(char value, char... others)
+	{
+		for(int i = 0; i < others.length; i++)
+		{
+			if(value == others[i])
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void error(String errorMessage)
+	{
+		this.txtArea.setBackground(Color.RED);
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {public void run() {SwingUtilities.invokeLater(new Runnable() {public void run() {txtArea.setBackground(DEFAULTCOLOR);}});}}, 1000);
+		this.getButton.setEnabled(false);
+		this.errorArea.setText(errorMessage);
 	}
 
 }
