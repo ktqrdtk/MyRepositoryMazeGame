@@ -250,7 +250,7 @@ public class MazeToText implements ActionListener
 			singleEnterCount++;
 			bottom++;
 		}
-		if(array[11].charAt(7) == ' ')
+		if(array[11].charAt(6) == ' ')
 		{
 			singleEnterCount++;
 			bottom++;
@@ -344,7 +344,7 @@ public class MazeToText implements ActionListener
 				char curChar = array[i].charAt(j);
 				
 				//testAgainst returns true if it equals one of them.
-				if(!testAgainst(curChar, ' ', 'X', '|', '-', '\n', '\r'))
+				if(!testAgainst(curChar, ' ', 'X', '|', '-', '\n'))
 				{
 					throw new IncorrectChars();
 				}
