@@ -291,7 +291,5 @@ public class MyJFrame extends JFrame implements ActionListener{
 	public int getTextAreaWidth()
 	{
 		return this.textAreaWidth;
-	}
-	
-	
+	}	
 }
