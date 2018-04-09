@@ -67,7 +67,7 @@ public class Generator {
 	public Grid[][] maze9()
 	{
 		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
-		theGrid[0][0] = getRandomChunkTopLeft();
+		theGrid[0][0] = getRandomChunkBottomRight();
 		theGrid[0][1] = getRandomChunkLeftRight();
 		theGrid[0][2] = getRandomChunkLeftBottom();
 		theGrid[1][0] = getRandomChunkTopBottom();
@@ -75,7 +75,7 @@ public class Generator {
 		theGrid[1][2] = getRandomChunkTopBottom();
 		theGrid[2][0] = getRandomChunkTopRight();
 		theGrid[2][1] = getRandomChunkLeftRight();
-		theGrid[2][2] = getRandomChunkBottomRight();
+		theGrid[2][2] = getRandomChunkTopLeft();
 		
 		return theGrid;
 	}
@@ -128,6 +128,23 @@ public class Generator {
 
 	{
 		Random randomizer = new Random();
+		String requirements = "";
+		if(top)
+		{
+			requirements+= "top ";
+		}
+		if(bottom)
+		{
+			requirements+= "bottom ";
+		}
+		if(left)
+		{
+			requirements+= "left ";
+		}
+		if(right)
+		{
+			requirements+= "right ";
+		}
 		
 		//makes it so that the random grids don't retry already tested grids
 		ArrayList<Integer> listOfUnusedIndexes = new ArrayList<Integer>();
@@ -152,7 +169,7 @@ public class Generator {
 				}
 				catch(Exception ex)
 				{
-					System.out.println("No grids apply");
+					System.out.println("No grids apply, requirements: " + requirements);
 					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
@@ -171,7 +188,7 @@ public class Generator {
 				}
 				catch(Exception ex)
 				{
-					System.out.println("No grids apply");
+					System.out.println("No grids apply, requirements: " + requirements);
 					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
@@ -190,7 +207,7 @@ public class Generator {
 				}
 				catch(Exception ex)
 				{
-					System.out.println("No grids apply");
+					System.out.println("No grids apply, requirements: " + requirements);
 					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
@@ -209,7 +226,7 @@ public class Generator {
 				}
 				catch(Exception ex)
 				{
-					System.out.println("No grids apply");
+					System.out.println("No grids apply, requirements: " + requirements);
 					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
@@ -228,7 +245,7 @@ public class Generator {
 				}
 				catch(Exception ex)
 				{
-					System.out.println("No grids apply");
+					System.out.println("No grids apply, requirements: " + requirements);
 					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
@@ -247,7 +264,7 @@ public class Generator {
 				}
 				catch(Exception ex)
 				{
-					System.out.println("No grids apply");
+					System.out.println("No grids apply, requirements: " + requirements);
 					randomGrid = MazeReader.listOfGrids.get(0);
 					break;
 				}
