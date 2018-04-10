@@ -84,8 +84,6 @@ public class Maze {
 				returnString += "\n";
 			}
 		}
-		System.out.println(location);
-		System.out.println(returnString);
 		return returnString;
 	}
 	
