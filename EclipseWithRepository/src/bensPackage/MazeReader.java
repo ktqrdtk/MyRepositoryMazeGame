@@ -65,11 +65,15 @@ public class MazeReader {
 	public void addFileNames(int input, ArrayList<String> arrayList)
 	{
 		String currentFileName;
-		for(int i = 0; i < input; i++)
+		//its input - 1 because the default maze would up the number which we dont want
+		for(int i = 0; i < input - 1; i++)
 		{
 			currentFileName = "MazesFolder//Maze" + i + ".txt";
 			arrayList.add(currentFileName);
 		}
+		
+		currentFileName = "MazesFolder//DefaultMaze.txt";
+		arrayList.add(currentFileName);
 	}
 	
 	public static void myPrint(ArrayList<String> input)

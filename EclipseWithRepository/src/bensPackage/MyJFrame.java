@@ -256,8 +256,8 @@ public class MyJFrame extends JFrame implements ActionListener{
 		MyJPanel centerPanel = new MyJPanel(this.panelList.size(), true);
 		this.addPanelToList(centerPanel);
 		FlowLayout noGapLayout = new FlowLayout();
-		noGapLayout.setHgap(1);
-		noGapLayout.setVgap(1);
+		noGapLayout.setHgap(0);
+		noGapLayout.setVgap(0);
 		centerPanel.setLayout(noGapLayout);
 		this.revalidate();
 		this.repaint();

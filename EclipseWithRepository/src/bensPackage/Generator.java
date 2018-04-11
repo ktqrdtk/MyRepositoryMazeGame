@@ -71,7 +71,7 @@ public class Generator {
 		theGrid[0][1] = getRandomChunkLeftRight();
 		theGrid[0][2] = getRandomChunkLeftBottom();
 		theGrid[1][0] = getRandomChunkTopBottom();
-		theGrid[1][1] = getRandomChunk();
+		theGrid[1][1] = getDefaultChunk();
 		theGrid[1][2] = getRandomChunkTopBottom();
 		theGrid[2][0] = getRandomChunkTopRight();
 		theGrid[2][1] = getRandomChunkLeftRight();
@@ -84,6 +84,14 @@ public class Generator {
 	{
 		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
 		return theGrid;
+	}
+	
+	public static Grid getDefaultChunk()
+	{
+		ArrayList<Grid> list = MazeReader.listOfGrids;
+		Grid defaultGrid = list.get(list.size() - 1);
+		//System.out.println((defaultGrid.getString()));
+		return list.get(list.size() - 1);
 	}
 	
 	public static Grid getRandomChunk()
@@ -148,10 +156,17 @@ public class Generator {
 		
 		//makes it so that the random grids don't retry already tested grids
 		ArrayList<Integer> listOfUnusedIndexes = new ArrayList<Integer>();
+		/*
 		for(int i = 0; i < MazeReader.listOfGrids.size(); i++)
 		{
 			listOfUnusedIndexes.add(i);
-		}	
+		}
+		*/
+		//not this^^ anymore because of defaultmaze
+		for(int i = 1; i < MazeReader.listOfGrids.size() - 1; i++)
+		{
+			listOfUnusedIndexes.add(i - 1);
+		}
 		int randomIndexForIndexes;
 		int randomIndex;
 		Grid randomGrid = MazeReader.listOfGrids.get(0);
