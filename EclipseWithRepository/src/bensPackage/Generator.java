@@ -162,7 +162,7 @@ public class Generator {
 			listOfUnusedIndexes.add(i);
 		}
 		*/
-		//not this^^ anymore because of defaultmaze
+		//not this^^ anymore because of defaultmaze, remember all your code that has anything to do with this will break if you add default maze somewhere to the list besides last.
 		for(int i = 1; i < MazeReader.listOfGrids.size() - 1; i++)
 		{
 			listOfUnusedIndexes.add(i - 1);
