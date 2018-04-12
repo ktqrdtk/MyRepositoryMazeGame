@@ -105,7 +105,7 @@ public class Maze {
 			x-= size;
 			y++;
 		}
-		return maze[x][y];
+		return maze[y][x];
 	}
 	
 }

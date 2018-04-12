@@ -279,7 +279,6 @@ public class MyJFrame extends JFrame implements ActionListener{
 				this.textAreaWidth = (int)txtArea.getBounds().getWidth();
 			}
 		}
-		
 		this.addPanelToMainPanel(centerPanel.getListLocation(), BorderLayout.CENTER);
 	}
 	
