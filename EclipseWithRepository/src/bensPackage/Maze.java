@@ -22,9 +22,13 @@ public class Maze {
 		{
 			fontSize = 28;
 		}
-		else
+		else if(getSize() == 3)
 		{
 			fontSize = 18;
+		}
+		else
+		{
+			fontSize = 15;
 		}
 	}
 	
@@ -32,33 +36,6 @@ public class Maze {
 	{
 		return maze;
 	}
-	
-	/*public String getString(boolean hasSpaces)
-	{
-		String mazeInString = "";
-			for(int i = 0; i < maze.length; i++)
-			{
-				for(int j = 0; j < maze[i].length; j++)
-				{
-					for(int k = 0; k < maze[i][j].getGrid().length; k++)
-					{
-						for(int l = 0; l < maze[i][j].getGrid()[k].length; l++)
-						{
-							mazeInString = mazeInString + maze[i][j].getGrid()[k][l];
-							if((l < maze[i][j].getGrid()[k].length - 1) && hasSpaces)
-							{
-								mazeInString += " ";
-							}
-						}
-						if((k < (maze[i][j].getGrid().length - 1)) || j < maze[i].length)
-						{
-							mazeInString += "\n";
-						}
-					}
-				}
-			}
-		return mazeInString;
-	}*/
 	
 	public int getSize()
 	{

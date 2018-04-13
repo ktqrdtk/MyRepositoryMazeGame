@@ -60,7 +60,7 @@ public class Grid {
 		}
 	}
 	
-	public void getEntrances(ArrayList<Grid> arrayList)
+	public static void getEntrances(ArrayList<Grid> arrayList)
 	{
 		Grid curGrid;
 		for(int i = 0; i < arrayList.size(); i++)
@@ -70,7 +70,7 @@ public class Grid {
 		}
 	}
 	
-	public void getEntrances(Grid input)
+	public static void getEntrances(Grid input)
 	{
 		if(input.hasTop())
 		{

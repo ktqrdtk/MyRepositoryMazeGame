@@ -58,8 +58,7 @@ public class MazeReader {
 			}
 		}
 		
-		Grid callerGrid = new Grid();
-		callerGrid.getEntrances(listOfGrids);
+		Grid.getEntrances(listOfGrids);
 	}
 	
 	public void addFileNames(int input, ArrayList<String> arrayList)

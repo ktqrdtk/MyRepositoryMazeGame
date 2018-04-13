@@ -75,17 +75,32 @@ public class Generator {
 		theGrid[2][0] = getRandomChunkTopRight();
 		theGrid[2][1] = getRandomChunkLeftRight();
 		theGrid[2][2] = getRandomChunkTopLeft();
-		
-		
 
-		
-		
 		return theGrid;
 	}
 	
 	public Grid[][] maze16()
 	{
 		Grid[][] theGrid = new Grid[(int)Math.sqrt(this.size)][(int)Math.sqrt(this.size)];
+		
+		theGrid[0][0] = getRandomChunkBottomRight();
+		theGrid[0][1] = getRandomChunkLeftRight();
+		theGrid[0][2] = getRandomChunkLeftRight();
+		theGrid[0][3] = getRandomChunkLeftBottom();
+		theGrid[1][0] = getRandomChunkTopBottom();
+		theGrid[1][1] = getRandomChunkBottomRight();
+		theGrid[1][2] = getRandomChunkLeftRight();
+		theGrid[1][3] = getRandomChunkTopLeft();
+		theGrid[2][0] = getRandomChunkTopBottom();
+		theGrid[2][1] = getRandomChunkTopRight();
+		theGrid[2][2] = getRandomChunkLeftRight();
+		theGrid[2][3] = getRandomChunkLeftBottom();
+		theGrid[3][0] = getRandomChunkTopRight();
+		theGrid[3][1] = getRandomChunkLeftRight();
+		theGrid[3][2] = getRandomChunkLeftRight();
+		theGrid[3][3] = getRandomChunkTopLeft();
+		
+		
 		return theGrid;
 	}
 	
@@ -166,10 +181,11 @@ public class Generator {
 		}
 		*/
 		//not this^^ anymore because of defaultmaze, remember all your code that has anything to do with this will break if you add default maze somewhere to the list besides last.
-		for(int i = 1; i < MazeReader.listOfGrids.size() - 1; i++)
+		for(int i = 1; i < MazeReader.listOfGrids.size(); i++)
 		{
 			listOfUnusedIndexes.add(i - 1);
 		}
+		
 		int randomIndexForIndexes;
 		int randomIndex;
 		Grid randomGrid = MazeReader.listOfGrids.get(0);
