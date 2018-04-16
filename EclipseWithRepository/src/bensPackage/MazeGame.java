@@ -98,10 +98,5 @@ public class MazeGame
 		inputFrame.addComponentToPanel(southLabel, BorderLayout.SOUTH, inputFrame.getMainPane().getListLocation());
 		inputFrame.addActionListeners();
 	}
-	
-	public MyJFrame getFrame()
-	{
-		return this.frame;
-	}
 
 }
