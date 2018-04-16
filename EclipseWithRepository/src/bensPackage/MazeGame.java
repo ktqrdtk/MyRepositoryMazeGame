@@ -18,7 +18,7 @@ import javax.swing.UIManager;
 
 public class MazeGame
 {
-	private MyJFrame frame;
+	private Player player;
 	private Maze maze;
 	private JLabel southLabel;
 	private JLabel eastLabel;
@@ -35,10 +35,12 @@ public class MazeGame
         }
         
         MazeGame mzGm = new MazeGame();
+        mzGm.player = new Player();
 		mzGm.createAndShowGUI();
-		mzGm.frame.askForSize();
+		mzGm.player.frameInstantiated();
+		mzGm.player.frame.askForSize();
 		//waits till size is chosen
-		while(mzGm.frame.getChosenSize() == -1)
+		while(mzGm.player.frame.getChosenSize() == -1)
 		{
 			try 
 			{
@@ -52,8 +54,8 @@ public class MazeGame
 
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
-		mzGm.maze = new Maze((int)Math.pow(mzGm.frame.getChosenSize(), 2));
-		mzGm.frame.displayMazes(mzGm.maze);
+		mzGm.maze = new Maze((int)Math.pow(mzGm.player.frame.getChosenSize(), 2));
+		mzGm.player.frame.displayMazes(mzGm.maze);
 	}
 	
 	public void readFile(int input)
@@ -64,13 +66,13 @@ public class MazeGame
 	
 	public void createAndShowGUI()
 	{
-		frame = new MyJFrame("Maze Game - Ben Hilton", new BorderLayout());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		addComponentsToPanel(frame);
+		player.frame = new MyJFrame("Maze Game - Ben Hilton", new BorderLayout());
+		player.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addComponentsToPanel(player.frame);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setPreferredSize(new Dimension(screenSize.height, screenSize.height)); 
-        frame.pack();
-        frame.setVisible(true);
+		player.frame.setPreferredSize(new Dimension(screenSize.height, screenSize.height)); 
+		player.frame.pack();
+		player.frame.setVisible(true);
 	}
 	
 	public void addComponentsToPanel(MyJFrame inputFrame)
