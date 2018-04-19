@@ -37,7 +37,6 @@ public class MazeGame
         MazeGame mzGm = new MazeGame();
         mzGm.player = new Player();
 		mzGm.createAndShowGUI();
-		mzGm.player.frameInstantiated();
 		mzGm.player.frame.askForSize();
 		//waits till size is chosen
 		while(mzGm.player.frame.getChosenSize() == -1)
@@ -55,7 +54,9 @@ public class MazeGame
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
 		mzGm.maze = new Maze((int)Math.pow(mzGm.player.frame.getChosenSize(), 2));
-		mzGm.player.frame.displayMazes(mzGm.maze);
+		int centerPanelNum = mzGm.player.frame.displayMazes(mzGm.maze);
+		mzGm.player.frameInstantiated();
+		mzGm.player.frame.finishDisplay(centerPanelNum);
 	}
 	
 	public void readFile(int input)

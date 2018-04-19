@@ -22,9 +22,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-@SuppressWarnings({"serial"})
-public class MyJFrame extends JFrame implements ActionListener{
-	
+public class MyJFrame extends JFrame implements ActionListener
+{
+	private static final long serialVersionUID = 1L;
 	private ArrayList<MyJPanel> panelList;
 	private ArrayList<JButton> listOfButtons;
 	private ArrayList<JLabel> listOfLabels;
@@ -249,7 +249,7 @@ public class MyJFrame extends JFrame implements ActionListener{
 		this.addComponentToPanelNonLayout(b4, inputPanel.getListLocation());
 	}
 	
-	public void displayMazes(Maze maze)
+	public int displayMazes(Maze maze)
 	{
 		GridLayout gridLayout = new GridLayout(0, maze.getSize());
 		gridLayout.setHgap(0);
@@ -285,7 +285,12 @@ public class MyJFrame extends JFrame implements ActionListener{
 				this.textAreaWidth = (int)txtArea.getBounds().getWidth();
 			}
 		}
-		this.addPanelToMainPanel(centerPanel.getListLocation(), BorderLayout.CENTER);
+		return centerPanel.getListLocation();
+	}
+	
+	public void finishDisplay(int input)
+	{
+		this.addPanelToMainPanel(input, BorderLayout.CENTER);
 	}
 	
 	public Font getFont()

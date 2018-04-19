@@ -6,8 +6,8 @@ import javax.swing.AbstractAction;
 
 public class MoveAction extends AbstractAction
 {
+	private static final long serialVersionUID = 1L;
 	Controls direction;
-	Object source;
 	public MoveAction(Controls direction)
 	{
 		this.direction = direction;
@@ -32,8 +32,8 @@ public class MoveAction extends AbstractAction
 		{
 			right();
 		}
-		source = e.getSource();
-		System.out.println(source);
+		
+		System.out.println(direction);
 	}
 	
 	public void up()

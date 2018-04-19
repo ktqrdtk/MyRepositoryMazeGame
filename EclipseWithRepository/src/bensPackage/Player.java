@@ -1,5 +1,7 @@
 package bensPackage;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
@@ -15,13 +17,20 @@ public class Player
 	public MyJFrame frame;
 	private InputMap inputMap;
 	private ActionMap actionMap;
+	private int curGrid;
+	
 	
 	public Player()
 	{
-		
+		curGrid = 0;
 	}
 	
 	public void frameInstantiated()
+	{
+		bindControls();
+	}
+	
+	public void bindControls()
 	{
 		inputMap = frame.getMainPane().getInputMap(IFW);
 		actionMap = frame.getMainPane().getActionMap();
@@ -38,6 +47,4 @@ public class Player
 		actionMap.put(Controls.LEFT_ACTION, new MoveAction(Controls.LEFT_ACTION));
 		actionMap.put(Controls.RIGHT_ACTION, new MoveAction(Controls.RIGHT_ACTION));
 	}
-	
-
 }
