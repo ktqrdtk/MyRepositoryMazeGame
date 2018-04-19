@@ -55,6 +55,7 @@ public class MazeGame
 		mzGm.readFile(totalNumOfMazesInFile);
 		mzGm.maze = new Maze((int)Math.pow(mzGm.player.frame.getChosenSize(), 2));
 		int centerPanelNum = mzGm.player.frame.displayMazes(mzGm.maze);
+		mzGm.player.setMaze(mzGm.maze);
 		mzGm.player.frameInstantiated();
 		mzGm.player.frame.finishDisplay(centerPanelNum);
 	}

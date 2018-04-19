@@ -4,12 +4,18 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import bensPackage.Maze;
+import bensPackage.Player;
+
 public class MoveAction extends AbstractAction
 {
 	private static final long serialVersionUID = 1L;
 	Controls direction;
-	public MoveAction(Controls direction)
+	Player player;
+	Maze maze;
+	public MoveAction(Controls direction, Player player)
 	{
+		this.player = player;
 		this.direction = direction;
 	}
 

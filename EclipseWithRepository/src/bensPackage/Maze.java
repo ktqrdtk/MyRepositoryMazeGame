@@ -39,7 +39,12 @@ public class Maze {
 	
 	public int getSize()
 	{
-		return (int)Math.sqrt(this.numOfGrids);
+		return this.size;
+	}
+	
+	public int getNumOfGrids()
+	{
+		return this.numOfGrids;
 	}
 	
 	public String getString(int location, boolean hasSpaces)

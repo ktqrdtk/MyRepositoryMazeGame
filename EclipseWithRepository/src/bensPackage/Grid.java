@@ -208,4 +208,14 @@ public class Grid {
 		
 		return returnString;
 	}
+	
+	public void setPos(Coordinate coords)
+	{
+		setPos(coords.x, coords.y);
+	}
+	
+	public void setPos(int x, int y)
+	{
+		this.grid[y][x] = '#';
+	}
 }
