@@ -19,12 +19,6 @@ public class Player
 	private ActionMap actionMap;
 	private int curGrid;
 	
-	
-	public Player()
-	{
-		curGrid = 0;
-	}
-	
 	public void frameInstantiated()
 	{
 		bindControls();
@@ -34,14 +28,14 @@ public class Player
 	{
 		inputMap = frame.getMainPane().getInputMap(IFW);
 		actionMap = frame.getMainPane().getActionMap();
-		inputMap.put(KeyStroke.getKeyStroke("UP"), Controls.UP_ACTION);
-		inputMap.put(KeyStroke.getKeyStroke("DOWN"), Controls.DOWN_ACTION);
-		inputMap.put(KeyStroke.getKeyStroke("LEFT"), Controls.LEFT_ACTION);
-		inputMap.put(KeyStroke.getKeyStroke("RIGHT"), Controls.RIGHT_ACTION);
 		inputMap.put(KeyStroke.getKeyStroke("W"), Controls.UP_ACTION);
 		inputMap.put(KeyStroke.getKeyStroke("S"), Controls.DOWN_ACTION);
 		inputMap.put(KeyStroke.getKeyStroke("A"), Controls.LEFT_ACTION);
 		inputMap.put(KeyStroke.getKeyStroke("D"), Controls.RIGHT_ACTION);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), Controls.UP_ACTION);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), Controls.DOWN_ACTION);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), Controls.LEFT_ACTION);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), Controls.RIGHT_ACTION);
 		actionMap.put(Controls.UP_ACTION, new MoveAction(Controls.UP_ACTION));
 		actionMap.put(Controls.DOWN_ACTION, new MoveAction(Controls.DOWN_ACTION));
 		actionMap.put(Controls.LEFT_ACTION, new MoveAction(Controls.LEFT_ACTION));
