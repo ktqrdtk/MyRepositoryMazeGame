@@ -21,32 +21,34 @@ public class Player
 	private Maze maze;
 	private Grid curGrid;
 	private Coordinate curCoords;
+	private int curGridNum;
 	
 	public void frameInstantiated()
 	{
 		bindControls();
-		Random random = new Random();
-		int randomNum = random.nextInt(maze.getNumOfGrids());
+		int randomNum = this.getIntRandomGrid();
 		curGrid = maze.getGrid(randomNum);
+		curGridNum = randomNum;
 		Coordinate startPos = new Coordinate();
 		if(curGrid.hasTopEz())
 		{
-			startPos.setCoords(7, 0);
+			startPos.setCoords(6, 0);
 		}
 		else if(curGrid.hasLeftEz())
 		{
-			startPos.setCoords(0, 7);
+			startPos.setCoords(0, 6);
 		}
 		else if(curGrid.hasRightEz())
 		{
-			startPos.setCoords(11, 7);
+			startPos.setCoords(11, 6);
 		}
 		else
 		{
-			startPos.setCoords(7, 11);
+			startPos.setCoords(6, 11);
 		}
 		curCoords = startPos;
 		curGrid.setPos(curCoords);
+		this.updateCurTxtArea();
 	}
 	
 	public void bindControls()
@@ -76,4 +78,27 @@ public class Player
 	{
 		return this.maze;
 	}
+	
+	public int getCurGridNum()
+	{
+		return this.curGridNum;
+	}
+	
+	public void updateCurTxtArea()
+	{
+		this.frame.updateTxtArea(this.getCurGridNum(), this.getMaze().getGrid(this.getCurGridNum()));
+	}
+	
+	public int getIntRandomGrid()
+	{
+		int randomNum;
+		Random random = new Random();
+		do
+		{
+			randomNum = random.nextInt(maze.getNumOfGrids());
+		}
+		while(randomNum == maze.getMiddleGridNum());
+		return randomNum;
+	}
+	
 }

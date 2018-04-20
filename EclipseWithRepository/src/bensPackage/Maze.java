@@ -90,4 +90,17 @@ public class Maze {
 		return maze[y][x];
 	}
 	
+	public int getMiddleGridNum()
+	{
+		switch(this.size)
+		{
+		case 1:
+			return 0;
+		case 3:
+			return 4;
+		default:
+			return -1;
+		}
+	}
+	
 }

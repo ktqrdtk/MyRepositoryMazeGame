@@ -28,6 +28,7 @@ public class MyJFrame extends JFrame implements ActionListener
 	private ArrayList<MyJPanel> panelList;
 	private ArrayList<JButton> listOfButtons;
 	private ArrayList<JLabel> listOfLabels;
+	private ArrayList<JTextArea> txtAreas;
 	private int chosenSize;
 	private MyJPanel askingPanel;
 	private Font font;
@@ -44,6 +45,7 @@ public class MyJFrame extends JFrame implements ActionListener
 		panelList.add(panel);
 		this.add(panelList.get(panel.getListLocation()));
 		this.chosenSize = -1;
+		txtAreas = new ArrayList<JTextArea>();
 	}
 	
 	public int getNumOfPanels()
@@ -283,9 +285,15 @@ public class MyJFrame extends JFrame implements ActionListener
 				this.addComponentToPanel(txtArea, "irregular", centerPanel.getListLocation());
 				curLocation++;
 				this.textAreaWidth = (int)txtArea.getBounds().getWidth();
+				this.txtAreas.add(txtArea);
 			}
 		}
 		return centerPanel.getListLocation();
+	}
+	
+	public void updateTxtArea(int txtAreaLocation, Grid grid)
+	{
+		txtAreas.get(txtAreaLocation).setText(grid.getString());
 	}
 	
 	public void finishDisplay(int input)

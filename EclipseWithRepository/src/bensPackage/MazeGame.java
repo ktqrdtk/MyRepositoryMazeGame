@@ -62,8 +62,7 @@ public class MazeGame
 	
 	public void readFile(int input)
 	{
-		@SuppressWarnings("unused")
-		MazeReader mazeReader = new MazeReader(input);
+		new MazeReader(input);
 	}
 	
 	public void createAndShowGUI()

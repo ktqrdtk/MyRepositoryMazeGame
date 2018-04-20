@@ -45,20 +45,21 @@ public class MoveAction extends AbstractAction
 	public void up()
 	{
 		
+		player.updateCurTxtArea();
 	}
 	
 	public void down()
 	{
-		
+		player.updateCurTxtArea();
 	}
 	
 	public void left()
 	{
-		
+		player.updateCurTxtArea();
 	}
 	
 	public void right()
 	{
-		
+		player.updateCurTxtArea();
 	}
 }
