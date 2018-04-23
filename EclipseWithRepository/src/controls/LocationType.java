@@ -2,5 +2,5 @@ package controls;
 
 public enum LocationType 
 {
-	SPACE, EX, VERTICAL, HORIZONTAL, WALL, OTHER_GRID, INVALID;
+	SPACE, EX, VERTICAL, HORIZONTAL, OTHER_GRID, INVALID;
 }

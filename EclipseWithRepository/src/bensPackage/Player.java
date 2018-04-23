@@ -20,15 +20,22 @@ public class Player
 	private InputMap inputMap;
 	private ActionMap actionMap;
 	private Maze maze;
-	private Grid curGrid;
-	private Coordinate curCoords;
+	public Grid curGrid;
+	public Coordinate curCoords;
 	private int curGridNum;
 	private LocationType[] surroundings = new LocationType[8];
+	//private Coordinate[] entranceCoords = new Coordinate[8];
+	
+	Player()
+	{
+		//setUpEntranceCoords();
+	}
 	
 	public void frameInstantiated()
 	{
 		bindControls();
 		setPlayerStartPos();
+		updatePlayerSurroundings();
 	}
 	
 	public void bindControls()
@@ -75,9 +82,26 @@ public class Player
 		this.updateCurTxtArea();
 	}
 	
+	/*public void setUpEntranceCoords()
+	{
+		entranceCoords[0] = new Coordinate(5, 0);
+		entranceCoords[1] = new Coordinate(6, 0);
+		entranceCoords[2] = new Coordinate(5, 11);
+		entranceCoords[3] = new Coordinate(6, 11);
+		entranceCoords[4] = new Coordinate(0, 5);
+		entranceCoords[5] = new Coordinate(0, 6);
+		entranceCoords[6] = new Coordinate(11, 5);
+		entranceCoords[7] = new Coordinate(11, 6);
+	}*/
+	
 	public void setMaze(Maze maze)
 	{
 		this.maze = maze;
+	}
+	
+	public LocationType[] getSurroundings()
+	{
+		return surroundings;
 	}
 	
 	public Maze getMaze()
@@ -117,42 +141,63 @@ public class Player
 	
 	public LocationType getLocationType(int input)
 	{
-		LocationType returnValue = LocationType.INVALID;
 		int x = curCoords.x;
 		int y = curCoords.y;
-		
+		Coordinate inputCoord;
 		//input values
-		//  012
-		//  3X4
 		//  567
+		//  3X4
+		//  012
 		
 		switch(input)
 		{
 		case 0:
-			Coordinate coord0 = new Coordinate(x - 1, y + 1);
-			//top left
-			if(coord0.x < 1)
-			{
-				
-			}
+			inputCoord = new Coordinate(x - 1, y + 1);
 			break;
 		case 1:
+			inputCoord = new Coordinate(x, y + 1);
 			break;
 		case 2:
+			inputCoord = new Coordinate(x + 1, y + 1);
 			break;
 		case 3:
+			inputCoord = new Coordinate(x - 1, y);
 			break;
 		case 4:
+			inputCoord = new Coordinate(x + 1, y);
 			break;
 		case 5:
+			inputCoord = new Coordinate(x - 1, y - 1);
 			break;
 		case 6:
+			inputCoord = new Coordinate(x, y - 1);
 			break;
 		case 7:
+			inputCoord = new Coordinate(x + 1, y - 1);
 			break;
+		default:
+			return LocationType.INVALID;
 		}
-		
-		return returnValue;
+		if(inputCoord.x < 0 || inputCoord.y < 0 || inputCoord.x > 11 || inputCoord.y > 11)
+		{
+			return LocationType.OTHER_GRID;
+		}
+		else
+		{
+			switch(curGrid.getGrid()[inputCoord.y][inputCoord.x])
+			{
+			case 'X':
+				return LocationType.EX;
+			case '|':
+				return LocationType.VERTICAL;
+			case '-':
+				return LocationType.HORIZONTAL;
+			case ' ':
+				return LocationType.SPACE;
+			default:
+				return LocationType.INVALID;
+			}
+		}
 	}
 	
 }

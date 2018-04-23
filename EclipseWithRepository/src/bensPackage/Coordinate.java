@@ -42,8 +42,29 @@ public class Coordinate
 		return this.y;
 	}
 	
+	@Override
 	public String toString()
 	{
 		return "X: " + this.x + " Y: " + this.y;
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(obj instanceof Coordinate)
+		{
+			if(((Coordinate)obj).x == this.x && this.y == ((Coordinate)obj).y)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return super.equals(obj);
+		}
 	}
 }
