@@ -22,7 +22,7 @@ public class Player
 	private Maze maze;
 	public Grid curGrid;
 	public Coordinate curCoords;
-	private int curGridNum;
+	public int curGridNum;
 	private LocationType[] surroundings = new LocationType[8];
 	//private Coordinate[] entranceCoords = new Coordinate[8];
 	
@@ -131,7 +131,6 @@ public class Player
 	{
 		for(int i = 0; i < surroundings.length; i++)
 		{
-			System.out.println(i + " ");
 			surroundings[i] = getLocationType(i);
 		}
 	}
@@ -175,7 +174,6 @@ public class Player
 		default:
 			return LocationType.INVALID;
 		}
-		System.out.println("Old Coords: " + curCoords + " New Coords: " + inputCoord);
 		if(inputCoord.x < 0 || inputCoord.y < 0 || inputCoord.x > 11 || inputCoord.y > 11)
 		{
 			return LocationType.OTHER_GRID;

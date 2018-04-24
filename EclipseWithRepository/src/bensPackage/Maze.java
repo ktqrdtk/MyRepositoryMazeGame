@@ -1,5 +1,7 @@
 package bensPackage;
 
+import controls.Controls;
+
 @SuppressWarnings("unused")
 public class Maze {
 	
@@ -101,6 +103,22 @@ public class Maze {
 		default:
 			return -1;
 		}
+	}
+	
+	public int getGridNumRelative(Controls direction, int oldNum)
+	{
+		switch(direction)
+		{
+		case UP_ACTION :
+			return oldNum - size;
+		case DOWN_ACTION :
+			return oldNum + size;
+		case LEFT_ACTION :
+			return oldNum - 1;
+		case RIGHT_ACTION :
+			return oldNum + 1;
+		}
+		return -5;
 	}
 	
 }
