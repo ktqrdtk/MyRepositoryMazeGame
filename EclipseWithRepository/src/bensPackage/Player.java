@@ -46,10 +46,6 @@ public class Player
 		inputMap.put(KeyStroke.getKeyStroke("S"), Controls.DOWN_ACTION);
 		inputMap.put(KeyStroke.getKeyStroke("A"), Controls.LEFT_ACTION);
 		inputMap.put(KeyStroke.getKeyStroke("D"), Controls.RIGHT_ACTION);
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), Controls.UP_ACTION);
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), Controls.DOWN_ACTION);
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), Controls.LEFT_ACTION);
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), Controls.RIGHT_ACTION);
 		actionMap.put(Controls.UP_ACTION, new MoveAction(Controls.UP_ACTION, this));
 		actionMap.put(Controls.DOWN_ACTION, new MoveAction(Controls.DOWN_ACTION, this));
 		actionMap.put(Controls.LEFT_ACTION, new MoveAction(Controls.LEFT_ACTION, this));
@@ -135,6 +131,7 @@ public class Player
 	{
 		for(int i = 0; i < surroundings.length; i++)
 		{
+			System.out.println(i + " ");
 			surroundings[i] = getLocationType(i);
 		}
 	}
@@ -178,6 +175,7 @@ public class Player
 		default:
 			return LocationType.INVALID;
 		}
+		System.out.println("Old Coords: " + curCoords + " New Coords: " + inputCoord);
 		if(inputCoord.x < 0 || inputCoord.y < 0 || inputCoord.x > 11 || inputCoord.y > 11)
 		{
 			return LocationType.OTHER_GRID;
