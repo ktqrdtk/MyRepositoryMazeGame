@@ -1,7 +1,9 @@
 package bensPackage;
 
-import java.awt.event.KeyEvent;
+import java.awt.Color;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -15,7 +17,10 @@ import controls.MoveAction;
 public class Player
 {
 	public static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
-	
+	public static final int COLOR_UPDATE_INTERVAL = 1000;
+	public static final char PLAYER_ASCII = 'O';
+	public static final Color firstColor = Color.GREEN;
+	public static final Color secondColor = Color.MAGENTA;
 	public MyJFrame frame;
 	private InputMap inputMap;
 	private ActionMap actionMap;
@@ -23,20 +28,16 @@ public class Player
 	public Grid curGrid;
 	public Coordinate curCoords;
 	public int curGridNum;
+	private boolean colorBool;
+	private Color forGround;
 	private LocationType[] surroundings = new LocationType[8];
-	//private Coordinate[] entranceCoords = new Coordinate[8];
-	public static final char PLAYER_ASCII = 'O';
-	
-	Player()
-	{
-		//setUpEntranceCoords();
-	}
 	
 	public void frameInstantiated()
 	{
 		bindControls();
 		setPlayerStartPos();
 		updatePlayerSurroundings();
+		startUpdatingColors();
 	}
 	
 	public void bindControls()
@@ -78,19 +79,7 @@ public class Player
 		curGrid.setPos(curCoords);
 		this.updateCurTxtArea();
 	}
-	
-	/*public void setUpEntranceCoords()
-	{
-		entranceCoords[0] = new Coordinate(5, 0);
-		entranceCoords[1] = new Coordinate(6, 0);
-		entranceCoords[2] = new Coordinate(5, 11);
-		entranceCoords[3] = new Coordinate(6, 11);
-		entranceCoords[4] = new Coordinate(0, 5);
-		entranceCoords[5] = new Coordinate(0, 6);
-		entranceCoords[6] = new Coordinate(11, 5);
-		entranceCoords[7] = new Coordinate(11, 6);
-	}*/
-	
+
 	public void setMaze(Maze maze)
 	{
 		this.maze = maze;
@@ -194,6 +183,37 @@ public class Player
 			default:
 				return LocationType.INVALID;
 			}
+		}
+	}
+	
+	public void startUpdatingColors()
+	{
+		TimerTask task = new TimerTask()
+				{
+					public void run()
+					{
+						oneColorUpdate();
+					}
+				};
+		Timer timer = new Timer();
+		timer.schedule(task, 0, COLOR_UPDATE_INTERVAL);
+	}
+	
+	public void oneColorUpdate()
+	{
+		if(colorBool)
+		{
+			forGround = firstColor;
+			colorBool = false;
+		}
+		else
+		{
+			forGround = secondColor;
+			colorBool = true;
+		}
+		for(int i = 0; i < maze.completedTxtAreas.size(); i++)
+		{
+			maze.completedTxtAreas.get(i).setForeground(forGround);
 		}
 	}
 	

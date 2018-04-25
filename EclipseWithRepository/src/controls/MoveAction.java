@@ -10,9 +10,9 @@ import bensPackage.Player;
 public class MoveAction extends AbstractAction
 {
 	private static final long serialVersionUID = 1L;
-	Controls direction;
-	Player player;
-	Maze maze;
+	private Controls direction;
+	public Player player;
+	public Maze maze;
 	public MoveAction(Controls direction, Player player)
 	{
 		this.player = player;
@@ -23,108 +23,58 @@ public class MoveAction extends AbstractAction
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if(direction == Controls.UP_ACTION)
-		{
-			up();
-		}
-		else if(direction == Controls.DOWN_ACTION)
-		{
-			down();
-		}
-		else if(direction == Controls.LEFT_ACTION)
-		{
-			left();
-		}
-		else if(direction == Controls.RIGHT_ACTION)
-		{
-			right();
-		}
+		move(direction);
 	}
 	
-	public void up()
+	@SuppressWarnings({ "incomplete-switch", "unused" })
+	public void move(Controls methodDirection)
 	{
-		LocationType moveTo = player.getSurroundings()[6];
-		if(moveTo == LocationType.SPACE)
+		LocationType moveTo;
+		int regularMoveX = 0;
+		int regularMoveY = 0;
+		int otherGridMoveX = 0;
+		int otherGridMoveY = 0;
+		switch(methodDirection)
 		{
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
-			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y - 1);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
+		case RIGHT_ACTION:
+			moveTo = player.getSurroundings()[4];
+			regularMoveX = 1;
+			otherGridMoveX = -11;
+			break;
+		case LEFT_ACTION:
+			moveTo = player.getSurroundings()[3];
+			regularMoveX = -1;
+			otherGridMoveX = 11;
+			break;
+		case DOWN_ACTION:
+			moveTo = player.getSurroundings()[1];
+			regularMoveY = 1;
+			otherGridMoveY = -11;
+			break;
+		default:
+			moveTo = player.getSurroundings()[6];
+			regularMoveY = -1;
+			otherGridMoveY = 11;
+			break;
 		}
-		else if(moveTo == LocationType.OTHER_GRID)
+		
+		switch(moveTo)
 		{
+		case SPACE:
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
+			player.curCoords.setCoords(player.curCoords.x + regularMoveX, player.curCoords.y + regularMoveY);
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
+			break;
+		case OTHER_GRID:
 			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
 			player.updateCurTxtArea();
-			player.curGridNum = maze.getGridNumRelative(Controls.UP_ACTION, player.curGridNum);
+			player.curGridNum = maze.getGridNumRelative(methodDirection, player.curGridNum);
 			player.curGrid = maze.getGrid(player.curGridNum);
-			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y + 11);
+			player.curCoords.setCoords(player.curCoords.x + otherGridMoveX, player.curCoords.y + otherGridMoveY);
 			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
+			break;
 		}
-		player.updateCurTxtArea();
-		player.updatePlayerSurroundings();
-	}
-	
-	public void down()
-	{
-		LocationType moveTo = player.getSurroundings()[1];
-		if(moveTo == LocationType.SPACE)
-		{
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
-			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y + 1);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
-		}
-		else if(moveTo == LocationType.OTHER_GRID)
-		{
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
-			player.updateCurTxtArea();
-			player.curGridNum = maze.getGridNumRelative(Controls.DOWN_ACTION, player.curGridNum);
-			player.curGrid = maze.getGrid(player.curGridNum);
-			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y - 11);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
-		}
-		player.updateCurTxtArea();
-		player.updatePlayerSurroundings();
-	}
-	
-	public void left()
-	{
-		LocationType moveTo = player.getSurroundings()[3];
-		if(moveTo == LocationType.SPACE)
-		{
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
-			player.curCoords.setCoords(player.curCoords.x - 1, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
-		}
-		else if(moveTo == LocationType.OTHER_GRID)
-		{
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
-			player.updateCurTxtArea();
-			player.curGridNum = maze.getGridNumRelative(Controls.LEFT_ACTION, player.curGridNum);
-			player.curGrid = maze.getGrid(player.curGridNum);
-			player.curCoords.setCoords(player.curCoords.x + 11, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
-		}
-		player.updateCurTxtArea();
-		player.updatePlayerSurroundings();
-	}
-	
-	public void right()
-	{
-		LocationType moveTo = player.getSurroundings()[4];
-		if(moveTo == LocationType.SPACE)
-		{
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
-			player.curCoords.setCoords(player.curCoords.x + 1, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
-		}
-		else if(moveTo == LocationType.OTHER_GRID)
-		{
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
-			player.updateCurTxtArea();
-			player.curGridNum = maze.getGridNumRelative(Controls.RIGHT_ACTION, player.curGridNum);
-			player.curGrid = maze.getGrid(player.curGridNum);
-			player.curCoords.setCoords(player.curCoords.x - 11, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
-		}
+		
 		player.updateCurTxtArea();
 		player.updatePlayerSurroundings();
 	}

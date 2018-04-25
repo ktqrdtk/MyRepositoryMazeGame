@@ -310,4 +310,9 @@ public class MyJFrame extends JFrame implements ActionListener
 	{
 		return this.textAreaWidth;
 	}	
+	
+	public JTextArea getTextArea(int input)
+	{
+		return txtAreas.get(input);
+	}
 }

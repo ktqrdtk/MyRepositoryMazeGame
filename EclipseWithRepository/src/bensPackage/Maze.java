@@ -1,5 +1,9 @@
 package bensPackage;
 
+import java.util.ArrayList;
+
+import javax.swing.JTextArea;
+
 import controls.Controls;
 
 @SuppressWarnings("unused")
@@ -9,13 +13,15 @@ public class Maze {
 	private Grid[][] maze;
 	private int fontSize;
 	private int size;
+	public ArrayList<JTextArea> completedTxtAreas;
 	
 	public Maze(int numOfGrids)
 	{
 		this.numOfGrids = numOfGrids;
 		this.size = (int)Math.sqrt(numOfGrids);
 		Generator myGen = new Generator();
-		maze = myGen.setMaze(numOfGrids);
+		this.maze = myGen.setMaze(numOfGrids);
+		this.completedTxtAreas = new ArrayList<JTextArea>();
 		if(getSize() == 1)
 		{
 			fontSize = 60;
@@ -119,6 +125,16 @@ public class Maze {
 			return oldNum + 1;
 		}
 		return -5;
+	}
+	
+	public void markTxtAreaComplete(int input, MyJFrame frame)
+	{
+		completedTxtAreas.add(frame.getTextArea(input));
+	}
+	
+	public void markTxtAreaComplete(JTextArea input)
+	{
+		completedTxtAreas.add(input);
 	}
 	
 }
