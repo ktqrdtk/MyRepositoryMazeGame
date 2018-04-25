@@ -25,6 +25,7 @@ public class Player
 	public int curGridNum;
 	private LocationType[] surroundings = new LocationType[8];
 	//private Coordinate[] entranceCoords = new Coordinate[8];
+	public static final char PLAYER_ASCII = 'O';
 	
 	Player()
 	{

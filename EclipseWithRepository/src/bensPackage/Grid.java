@@ -216,6 +216,6 @@ public class Grid {
 	
 	public void setPos(int x, int y)
 	{
-		this.grid[y][x] = '#';
+		this.grid[y][x] = Player.PLAYER_ASCII;
 	}
 }

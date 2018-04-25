@@ -48,7 +48,7 @@ public class MoveAction extends AbstractAction
 		{
 			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
 			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y - 1);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		else if(moveTo == LocationType.OTHER_GRID)
 		{
@@ -57,7 +57,7 @@ public class MoveAction extends AbstractAction
 			player.curGridNum = maze.getGridNumRelative(Controls.UP_ACTION, player.curGridNum);
 			player.curGrid = maze.getGrid(player.curGridNum);
 			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y + 11);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		player.updateCurTxtArea();
 		player.updatePlayerSurroundings();
@@ -70,7 +70,7 @@ public class MoveAction extends AbstractAction
 		{
 			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
 			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y + 1);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		else if(moveTo == LocationType.OTHER_GRID)
 		{
@@ -79,7 +79,7 @@ public class MoveAction extends AbstractAction
 			player.curGridNum = maze.getGridNumRelative(Controls.DOWN_ACTION, player.curGridNum);
 			player.curGrid = maze.getGrid(player.curGridNum);
 			player.curCoords.setCoords(player.curCoords.x, player.curCoords.y - 11);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		player.updateCurTxtArea();
 		player.updatePlayerSurroundings();
@@ -92,7 +92,7 @@ public class MoveAction extends AbstractAction
 		{
 			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
 			player.curCoords.setCoords(player.curCoords.x - 1, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		else if(moveTo == LocationType.OTHER_GRID)
 		{
@@ -101,7 +101,7 @@ public class MoveAction extends AbstractAction
 			player.curGridNum = maze.getGridNumRelative(Controls.LEFT_ACTION, player.curGridNum);
 			player.curGrid = maze.getGrid(player.curGridNum);
 			player.curCoords.setCoords(player.curCoords.x + 11, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		player.updateCurTxtArea();
 		player.updatePlayerSurroundings();
@@ -114,7 +114,7 @@ public class MoveAction extends AbstractAction
 		{
 			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = ' ';
 			player.curCoords.setCoords(player.curCoords.x + 1, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		else if(moveTo == LocationType.OTHER_GRID)
 		{
@@ -123,7 +123,7 @@ public class MoveAction extends AbstractAction
 			player.curGridNum = maze.getGridNumRelative(Controls.RIGHT_ACTION, player.curGridNum);
 			player.curGrid = maze.getGrid(player.curGridNum);
 			player.curCoords.setCoords(player.curCoords.x - 11, player.curCoords.y);
-			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = '#';
+			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
 		}
 		player.updateCurTxtArea();
 		player.updatePlayerSurroundings();
