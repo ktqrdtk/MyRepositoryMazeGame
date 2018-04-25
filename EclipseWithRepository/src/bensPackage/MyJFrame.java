@@ -2,25 +2,24 @@ package bensPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.AbstractButton;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 public class MyJFrame extends JFrame implements ActionListener
 {
@@ -294,6 +293,18 @@ public class MyJFrame extends JFrame implements ActionListener
 	public void updateTxtArea(int txtAreaLocation, Grid grid)
 	{
 		txtAreas.get(txtAreaLocation).setText(grid.getString());
+	}
+	
+	public void gameOver(JPanel input)
+	{
+		MyJFrame frame = this;
+		new Timer().schedule(new TimerTask() {public void run() {SwingUtilities.invokeLater(new Runnable() {public void run() {
+			frame.remove(getMainPane());
+			frame.add(input);
+			frame.revalidate();
+			frame.repaint();
+			}});}}, 1000);
+
 	}
 	
 	public void finishDisplay(int input)

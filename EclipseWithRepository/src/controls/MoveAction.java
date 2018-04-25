@@ -72,6 +72,7 @@ public class MoveAction extends AbstractAction
 			player.curGrid = maze.getGrid(player.curGridNum);
 			player.curCoords.setCoords(player.curCoords.x + otherGridMoveX, player.curCoords.y + otherGridMoveY);
 			player.curGrid.getGrid()[player.curCoords.y][player.curCoords.x] = Player.PLAYER_ASCII;
+			player.changedGrid();
 			break;
 		}
 		

@@ -67,4 +67,20 @@ public class Coordinate
 			return super.equals(obj);
 		}
 	}
+	
+	public static Coordinate getCoords(int location, int size)
+	{
+		int x = 0;
+		int y = 0;
+		for(int i = 0; i < location; i++)
+		{
+			x++;
+		}
+		while(x >= size)
+		{
+			x-= size;
+			y++;
+		}
+		return new Coordinate(x, y);
+	}
 }

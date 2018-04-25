@@ -8,7 +8,10 @@ import java.util.TimerTask;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.JLabel;
 
 import controls.Controls;
 import controls.LocationType;
@@ -17,10 +20,7 @@ import controls.MoveAction;
 public class Player
 {
 	public static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
-	public static final int COLOR_UPDATE_INTERVAL = 1000;
 	public static final char PLAYER_ASCII = 'O';
-	public static final Color firstColor = Color.GREEN;
-	public static final Color secondColor = Color.MAGENTA;
 	public MyJFrame frame;
 	private InputMap inputMap;
 	private ActionMap actionMap;
@@ -28,8 +28,6 @@ public class Player
 	public Grid curGrid;
 	public Coordinate curCoords;
 	public int curGridNum;
-	private boolean colorBool;
-	private Color forGround;
 	private LocationType[] surroundings = new LocationType[8];
 	
 	public void frameInstantiated()
@@ -37,7 +35,8 @@ public class Player
 		bindControls();
 		setPlayerStartPos();
 		updatePlayerSurroundings();
-		startUpdatingColors();
+		maze.startUpdatingColors();
+		changedGrid();
 	}
 	
 	public void bindControls()
@@ -186,35 +185,37 @@ public class Player
 		}
 	}
 	
-	public void startUpdatingColors()
+	public void changedGrid()
 	{
-		TimerTask task = new TimerTask()
-				{
-					public void run()
-					{
-						oneColorUpdate();
-					}
-				};
-		Timer timer = new Timer();
-		timer.schedule(task, 0, COLOR_UPDATE_INTERVAL);
-	}
-	
-	public void oneColorUpdate()
-	{
-		if(colorBool)
+		for(int i = 0; i < maze.completedTxtAreas.size(); i++)
 		{
-			forGround = firstColor;
-			colorBool = false;
+			if(frame.getTextArea(curGridNum).equals(maze.completedTxtAreas.get(i)))
+			{
+				return;
+			}
+		}
+		JTextArea curArea = frame.getTextArea(curGridNum);
+		maze.completedTxtAreas.add(curArea);
+		
+		int realSize;
+		if(maze.getSize() % 2 == 0)
+		{
+			realSize = maze.getNumOfGrids();
 		}
 		else
 		{
-			forGround = secondColor;
-			colorBool = true;
+			realSize = maze.getNumOfGrids() - 1;
 		}
-		for(int i = 0; i < maze.completedTxtAreas.size(); i++)
+		
+		if(maze.completedTxtAreas.size() == realSize)
 		{
-			maze.completedTxtAreas.get(i).setForeground(forGround);
+			String endString = "Congrats! Your chosen size: " + maze.getSize() + ". Your time: " + maze.getTime() + " seconds.";
+			JPanel endPanel = new JPanel();
+			JLabel endLabel = new JLabel(endString);
+			endPanel.add(endLabel);
+			frame.gameOver(endPanel);
 		}
 	}
+	
 	
 }

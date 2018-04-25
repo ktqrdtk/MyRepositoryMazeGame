@@ -1,6 +1,9 @@
 package bensPackage;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JTextArea;
 
@@ -13,7 +16,13 @@ public class Maze {
 	private Grid[][] maze;
 	private int fontSize;
 	private int size;
+	private boolean colorBool;
+	private Color forGround;
+	private int time = 0;
 	public ArrayList<JTextArea> completedTxtAreas;
+	private static final int COLOR_UPDATE_INTERVAL = 1000;
+	private static final Color firstColor = Color.GREEN;
+	private static final Color secondColor = Color.MAGENTA;
 	
 	public Maze(int numOfGrids)
 	{
@@ -84,18 +93,8 @@ public class Maze {
 	
 	public Grid getGrid(int location)
 	{
-		int x = 0;
-		int y = 0;
-		for(int i = 0; i < location; i++)
-		{
-			x++;
-		}
-		while(x >= size)
-		{
-			x-= size;
-			y++;
-		}
-		return maze[y][x];
+		Coordinate coord = Coordinate.getCoords(location, size);
+		return maze[coord.y][coord.x];
 	}
 	
 	public int getMiddleGridNum()
@@ -135,6 +134,43 @@ public class Maze {
 	public void markTxtAreaComplete(JTextArea input)
 	{
 		completedTxtAreas.add(input);
+	}
+	
+	public void startUpdatingColors()
+	{
+		TimerTask task = new TimerTask()
+				{
+					public void run()
+					{
+						oneColorUpdate();
+					}
+				};
+		Timer timer = new Timer();
+		timer.schedule(task, 0, COLOR_UPDATE_INTERVAL);
+	}
+	
+	public void oneColorUpdate()
+	{
+		if(colorBool)
+		{
+			forGround = firstColor;
+			colorBool = false;
+		}
+		else
+		{
+			forGround = secondColor;
+			colorBool = true;
+		}
+		for(int i = 0; i < completedTxtAreas.size(); i++)
+		{
+			completedTxtAreas.get(i).setForeground(forGround);
+		}
+		this.time++;
+	}
+	
+	public int getTime()
+	{
+		return this.time;
 	}
 	
 }
