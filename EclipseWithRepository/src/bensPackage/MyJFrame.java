@@ -234,16 +234,16 @@ public class MyJFrame extends JFrame implements ActionListener
 	
 	public void addButtonsForSize(MyJPanel inputPanel)
 	{
-		MyJButton b1 = new MyJButton("1 X 1", (int)AbstractButton.CENTER_ALIGNMENT, "size1");
+		//MyJButton b1 = new MyJButton("1 X 1", (int)AbstractButton.CENTER_ALIGNMENT, "size1");
 		MyJButton b2 = new MyJButton("2 X 2", (int)AbstractButton.CENTER_ALIGNMENT, "size2");
 		MyJButton b3 = new MyJButton("3 X 3", (int)AbstractButton.CENTER_ALIGNMENT, "size3");
 		MyJButton b4 = new MyJButton("4 X 4", (int)AbstractButton.CENTER_ALIGNMENT, "size4");
-		this.listOfButtons.add(b1);
+		//this.listOfButtons.add(b1);
 		this.listOfButtons.add(b2);
 		this.listOfButtons.add(b3);
 		this.listOfButtons.add(b4);
 		addActionListeners();
-		this.addComponentToPanelNonLayout(b1, inputPanel.getListLocation());
+		//this.addComponentToPanelNonLayout(b1, inputPanel.getListLocation());
 		this.addComponentToPanelNonLayout(b2, inputPanel.getListLocation());
 		//this ^^ and this vvv do the same thing just call them differently
 		this.addComponentToPanel(b3, "noLayout", inputPanel.getListLocation());

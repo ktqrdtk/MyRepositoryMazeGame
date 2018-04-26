@@ -68,7 +68,7 @@ public class MazeGame
 	{
 		player.frame = new MyJFrame("Maze Game - Ben Hilton", new BorderLayout());
 		player.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		addComponentsToPanel(player.frame);
+		//addComponentsToPanel(player.frame);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		player.frame.setPreferredSize(new Dimension(screenSize.height, screenSize.height)); 
 		player.frame.pack();
