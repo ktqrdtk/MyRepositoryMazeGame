@@ -50,7 +50,6 @@ public class MazeGame
 				e.printStackTrace();
 			}
 		}
-
 		int totalNumOfMazesInFile = new File("MazesFolder").listFiles().length;
 		mzGm.readFile(totalNumOfMazesInFile);
 		mzGm.maze = new Maze((int)Math.pow(mzGm.player.frame.getChosenSize(), 2));
